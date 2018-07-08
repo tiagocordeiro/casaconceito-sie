@@ -169,9 +169,9 @@ JET_DEFAULT_THEME = 'default'
 
 JET_THEMES = [
     {
-        'theme': 'default', # theme folder name
-        'color': '#47bac1', # color of the theme's button in user menu
-        'title': 'Default' # theme title
+        'theme': 'default',  # theme folder name
+        'color': '#47bac1',  # color of the theme's button in user menu
+        'title': 'Default'   # theme title
     },
     {
         'theme': 'green',
