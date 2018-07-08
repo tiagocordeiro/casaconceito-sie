@@ -8,7 +8,7 @@ class Indicacao(models.Model):
     descricao = models.TextField()
     valor = models.DecimalField(max_digits=11, decimal_places=2, default=0)
     data_criacao = models.DateTimeField(default=timezone.now)
-    corretor = models.ForeignKey(User,
+    added_by = models.ForeignKey(User,
                                  blank=True, null=True,
                                  on_delete=models.SET_NULL)
     last_modified = models.DateTimeField(auto_now=True)
