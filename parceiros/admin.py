@@ -3,23 +3,23 @@ from .models import Indicacao
 
 
 class IndicacaoAdmin(admin.ModelAdmin):
-    list_display = ('cliente', 'valor', 'data_criacao', 'added_by',)
-    # list_filter = ('cliente', 'data_criacao', 'added_by',)
-    search_fields = ('cliente', 'added_by',)
+    list_display = ('cliente', 'valor', 'data_criacao', 'corretor',)
+    # list_filter = ('cliente', 'data_criacao', 'corretor',)
+    search_fields = ('cliente', 'corretor',)
     # fieldsets = [(None, {'fields': [('cliente', 'descricao', 'valor')]})]
-    readonly_fields = ["added_by"]
+    readonly_fields = ["corretor"]
 
     def get_form(self, request, obj=None, **kwargs):
         self.exclude = []
         if not request.user.is_superuser:
             self.exclude.append('valor')  # here!
             self.exclude.append('data_criacao')
-            self.exclude.append('added_by')
+            self.exclude.append('corretor')
         return super(IndicacaoAdmin, self).get_form(request, obj, **kwargs)
 
     def get_list_filter(self, request):
         if request.user.is_superuser:
-            return ('cliente', 'data_criacao', 'added_by',)
+            return ('cliente', 'data_criacao', 'corretor',)
         else:
             return ('cliente',)
 
@@ -27,11 +27,11 @@ class IndicacaoAdmin(admin.ModelAdmin):
         qs = super(IndicacaoAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(added_by=request.user)
+        return qs.filter(corretor=request.user)
 
     def save_model(self, request, obj, form, change):
-        if getattr(obj, 'added_by', None) is None:
-            obj.added_by = request.user
+        if getattr(obj, 'corretor', None) is None:
+            obj.corretor = request.user
         obj.save()
 
 
