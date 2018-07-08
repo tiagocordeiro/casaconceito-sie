@@ -1,0 +1,1 @@
+# Projedo simples em Django para controle de indicações de vendas
