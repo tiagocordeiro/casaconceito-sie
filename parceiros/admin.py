@@ -3,13 +3,25 @@ from .models import Indicacao
 
 
 class IndicacaoAdmin(admin.ModelAdmin):
-    list_display = ('cliente', 'valor', 'data_criacao', 'added_by',)
+    list_display = ('cliente', 'valor', 'data_criacao', 'added_by', 'status')
     # list_filter = ('cliente', 'data_criacao', 'added_by',)
     search_fields = ('cliente', 'added_by',)
     # fieldsets = [(None, {'fields': [('cliente', 'descricao', 'valor')]})]
-    readonly_fields = ["added_by"]
+
+
+    def get_list_display(self, request):
+        if request.user.is_superuser:
+            return ('cliente', 'valor', 'data_criacao', 'added_by', 'status')
+        else:
+            return ('cliente', 'valor', 'data_criacao', 'status')
+
 
     def get_form(self, request, obj=None, **kwargs):
+        if request.user.is_superuser:
+            self.readonly_fields = ["added_by"]
+        else:
+            self.readonly_fields = ["added_by", "status"]
+
         self.exclude = []
         if not request.user.is_superuser:
             self.exclude.append('valor')  # here!
@@ -19,9 +31,9 @@ class IndicacaoAdmin(admin.ModelAdmin):
 
     def get_list_filter(self, request):
         if request.user.is_superuser:
-            return ('cliente', 'data_criacao', 'added_by',)
+            return ('cliente', 'data_criacao', 'added_by', 'status',)
         else:
-            return ('cliente',)
+            return ('cliente', 'status',)
 
     def get_queryset(self, request):
         qs = super(IndicacaoAdmin, self).get_queryset(request)
