@@ -37,7 +37,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 INSTALLED_APPS = [
     #'casaconceito.apps.SuitConfig',
     #'djamin',
-    'jet.dashboard',
+    # 'jet.dashboard',
     'jet',
     'django.contrib.admin',
     'django.contrib.auth',
