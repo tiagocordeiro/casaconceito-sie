@@ -8,13 +8,11 @@ class IndicacaoAdmin(admin.ModelAdmin):
     search_fields = ('cliente', 'added_by',)
     # fieldsets = [(None, {'fields': [('cliente', 'descricao', 'valor')]})]
 
-
     def get_list_display(self, request):
         if request.user.is_superuser:
             return ('cliente', 'valor', 'data_criacao', 'added_by', 'status')
         else:
             return ('cliente', 'valor', 'data_criacao', 'status')
-
 
     def get_form(self, request, obj=None, **kwargs):
         if request.user.is_superuser:
