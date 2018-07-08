@@ -24,6 +24,8 @@ from django.urls import path
 from pages.views import home_view
 from casaconceito import settings
 
+admin.site.site_header = 'Casa Conceito'
+
 urlpatterns = [
     # re_path(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     # re_path(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
