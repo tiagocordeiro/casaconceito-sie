@@ -1,5 +1,18 @@
 {% extends "base_generic.html" %}
 
+{% block breadcrumb %}
+    <nav class="cc-breadcrumb">
+    <div class="container">
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="{% url 'lista_indicacoes' %}" class="breadcrumb">Indicações</a>
+        <a href="{% url 'adiciona_indicacao' %}" class="breadcrumb">Nova</a>
+      </div>
+    </div>
+    </div>
+  </nav>
+{% endblock %}
+
 {% block content %}
 
 {% if form.errors %}

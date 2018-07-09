@@ -62,3 +62,7 @@ footer.page-footer {
 .card .card-image img {
     height: auto;
 }
+
+.cc-breadcrumb {
+    background-color: #72673b;
+}

@@ -1,5 +1,18 @@
 {% extends "base_generic.html" %}
 
+{% block breadcrumb %}
+    <nav class="cc-breadcrumb">
+    <div class="container">
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="{% url 'home_parceiros' %}" class="breadcrumb">Dashboard</a>
+        <a href="{% url 'lista_indicacoes' %}" class="breadcrumb">Minhas Indicações</a>
+      </div>
+    </div>
+    </div>
+  </nav>
+{% endblock %}
+
 {% block content %}
     <div class="responsive-table">
     <table class="striped">
