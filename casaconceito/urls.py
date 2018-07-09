@@ -21,7 +21,7 @@ from django.urls import path
 # from django.contrib import admin
 # from django.urls import path, re_path, include
 
-from pages.views import home_view
+# from pages.views import home_view
 # from parceiros.views import home_parceiros
 from casaconceito import settings
 
