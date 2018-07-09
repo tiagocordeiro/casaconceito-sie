@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+    {{ cliente.errors }}
+    {{ descricao.errors }}
+{% endif %}
+
+
+<form method="post" action="{% url 'adiciona_indicacao' %}">
+{% csrf_token %}
+
+<div>
+  <td>{{ form.cliente.label_tag }}</td>
+  <td>{{ form.cliente }}</td>
+</div>
+<div>
+  <td>{{ form.descricao.label_tag }}</td>
+  <td>{{ form.descricao }}</td>
+</div>
+<input type="hidden" name="added_by" value="{{ request.user }}" />
+
+<div>
+    {#  <input type="submit" value="login" class="btn waves-effect waves-light right" />#}
+    <button class="btn waves-effect waves-light right" type="submit" value="adiciona_indicacao" name="adiciona_indicacao">
+        Enviar <i class="material-icons right">send</i>
+    </button>
+</div>
+</form>
+
+{% endblock %}
