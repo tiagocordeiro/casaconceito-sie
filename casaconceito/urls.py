@@ -22,7 +22,7 @@ from django.urls import path
 # from django.urls import path, re_path, include
 
 from pages.views import home_view
-from parceiros.views import home_parceiros
+# from parceiros.views import home_parceiros
 from casaconceito import settings
 
 admin.site.site_header = 'Casa Conceito'
