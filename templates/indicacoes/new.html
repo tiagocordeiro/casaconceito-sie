@@ -12,12 +12,12 @@
 {% csrf_token %}
 
 <div>
-  <td>{{ form.cliente.label_tag }}</td>
   <td>{{ form.cliente }}</td>
+  <td>{{ form.cliente.label_tag }}</td>
 </div>
-<div>
-  <td>{{ form.descricao.label_tag }}</td>
+<div class="input-field col s12">
   <td>{{ form.descricao }}</td>
+  <td>{{ form.descricao.label_tag }}</td>
 </div>
 <input type="hidden" name="added_by" value="{{ request.user }}" />
 

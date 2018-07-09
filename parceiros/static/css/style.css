@@ -6,9 +6,8 @@
  * Made By MaterializeCSS.com
  */
 
-nav ul a,
-nav .brand-logo {
-  color: #444;
+nav ul a, nav .brand-logo {
+  color: #d4c470;
 }
 
 p {
@@ -16,7 +15,7 @@ p {
 }
 
 .sidenav-trigger {
-  color: #26a69a;
+  color: #d4c470;
 }
 
 .parallax-container {
