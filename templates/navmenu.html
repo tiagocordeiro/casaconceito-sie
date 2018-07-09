@@ -1,7 +1,10 @@
+{% load static %}
 <div class="navbar-fixed">
-  <nav class="white" role="navigation">
+  <nav class="black" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="{% url 'home_parceiros' %}" class="brand-logo">Logo</a>
+      <a id="logo-container" href="{% url 'home_parceiros' %}" class="brand-logo">
+          <img src="{% static "images/casa-conceito-logo.png" %}" alt="Casa Conceito">
+      </a>
       <ul class="right hide-on-med-and-down">
         <li><a href="{% url 'home_parceiros' %}">Dashboard</a></li>
         <li><a href="{% url 'lista_indicacoes' %}">Minhas Indicações</a></li>
