@@ -12,12 +12,12 @@
 {% csrf_token %}
 
 <div class="row">
-    <div class="input-field col s6">
+    <div class="input-field col s12 m6 l6">
         <i class="material-icons prefix">account_circle</i>
         {{ form.cliente }}
         {{ form.cliente.label_tag }}
     </div>
-    <div class="input-field col s6">
+    <div class="input-field col s12 m6 l6">
         <i class="material-icons prefix">phone</i>
         <input id="icon_telephone" type="tel" class="validate">
         <label for="icon_telephone">Telefone</label>
@@ -26,6 +26,7 @@
 <div class="row">
     <div class="input-field col s12">
 {#        {{ form.descricao }}#}
+        <i class="material-icons prefix">mode_edit</i>
         <textarea id="id_descricao" name="descricao" class="materialize-textarea"></textarea>
         {{ form.descricao.label_tag }}
     </div>
