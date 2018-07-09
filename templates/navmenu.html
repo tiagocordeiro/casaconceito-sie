@@ -1,9 +1,9 @@
 <div class="navbar-fixed">
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="{% url 'lista_indicacoes' %}" class="brand-logo">Logo</a>
+      <a id="logo-container" href="{% url 'home_parceiros' %}" class="brand-logo">Logo</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="{% url 'lista_indicacoes' %}">Dashboard</a></li>
+        <li><a href="{% url 'home_parceiros' %}">Dashboard</a></li>
         <li><a href="{% url 'lista_indicacoes' %}">Minhas Indicações</a></li>
         <li><a href="{% url 'adiciona_indicacao' %}">Nova Indicação</a></li>
         {% if user.is_authenticated %}
@@ -15,7 +15,7 @@
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
-        <li><a href="{% url 'lista_indicacoes' %}">Dashboard</a></li>
+        <li><a href="{% url 'home_parceiros' %}">Dashboard</a></li>
         <li><a href="{% url 'lista_indicacoes' %}">Minhas Indicações</a></li>
         <li><a href="{% url 'adiciona_indicacao' %}">Nova Indicação</a></li>
         {% if user.is_authenticated %}
