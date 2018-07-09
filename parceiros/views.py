@@ -28,5 +28,9 @@ def adiciona_indicacao(request):
 
 @login_required
 def lista_indicacoes(request):
-    indicacoes = Indicacao.objects.all().filter(added_by=request.user).order_by('-data_criacao')
+    if request.user.is_superuser:
+        indicacoes = Indicacao.objects.all().order_by('-data_criacao')
+    else:
+        indicacoes = Indicacao.objects.all().filter(added_by=request.user).order_by('-data_criacao')
+
     return render(request, 'indicacoes/list.html', {'indicacoes': indicacoes})

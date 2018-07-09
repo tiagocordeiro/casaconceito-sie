@@ -8,7 +8,9 @@
           <th>Indicação</th>
           <th>Valor</th>
           <th>Estatus</th>
+          {% if user.is_superuser %}
           <th>Dono</th>
+          {% endif %}
       </tr>
     </thead>
     <tbody>
@@ -17,7 +19,9 @@
         <td>{{ indicacao.cliente }}</td>
         <td>{{ indicacao.valor }}</td>
         <td>{{ indicacao.status }}</td>
+        {% if user.is_superuser %}
         <td>{{ indicacao.added_by }}</td>
+        {% endif %}
       </tr>
     {% endfor %}
     </tbody>
