@@ -1,13 +1,13 @@
 <div class="navbar-fixed">
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="{% url 'home' %}" class="brand-logo">Logo</a>
+      <a id="logo-container" href="{% url 'lista_indicacoes' %}" class="brand-logo">Logo</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="{% url 'home' %}">Dashboard</a></li>
-        <li><a href="#">Minhas Indicações</a></li>
-        <li><a href="#">Nova Indicação</a></li>
+        <li><a href="{% url 'lista_indicacoes' %}">Dashboard</a></li>
+        <li><a href="{% url 'lista_indicacoes' %}">Minhas Indicações</a></li>
+        <li><a href="{% url 'adiciona_indicacao' %}">Nova Indicação</a></li>
         {% if user.is_authenticated %}
-            <li>User: {{ user.get_username }}</li>
+            <li style="color: #5a5a5a">User: {{ user.get_username }}</li>
             <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
             {% else %}
             <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
@@ -15,11 +15,11 @@
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
-        <li><a href="{% url 'home' %}">Dashboard</a></li>
+        <li><a href="{% url 'lista_indicacoes' %}">Dashboard</a></li>
         <li><a href="#">Minhas Indicações</a></li>
         <li><a href="#">Nova Indicação</a></li>
         {% if user.is_authenticated %}
-            <li><Use></Use>r: {{ user.get_username }}</li>
+            <li style="color: #5a5a5a"><Use></Use>r: {{ user.get_username }}</li>
             <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
             {% else %}
             <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>

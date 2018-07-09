@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div class="responsive-table">
+    <table class="striped">
+    <thead>
+      <tr>
+          <th>Indicação</th>
+          <th>Valor</th>
+          <th>Estatus</th>
+          <th>Dono</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for indicacao in indicacoes %}
+      <tr>
+        <td>{{ indicacao.cliente }}</td>
+        <td>{{ indicacao.valor }}</td>
+        <td>{{ indicacao.status }}</td>
+        <td>{{ indicacao.added_by }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
+{% endblock %}

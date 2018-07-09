@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.conf import settings
 from django.shortcuts import redirect
 from .forms import IndicacaoForm
+from .models import Indicacao
 
 
 def home_parceiros(request):
@@ -18,9 +19,14 @@ def adiciona_indicacao(request):
             indicacao = form.save(commit=False)
             indicacao.added_by = request.user
             indicacao.save()
-            return render(request, 'indicacoes/new.html', {'form': form})
+            return redirect(lista_indicacoes)
 
     else:
         form = IndicacaoForm()
 
     return render(request, 'indicacoes/new.html', {'form': form})
+
+@login_required
+def lista_indicacoes(request):
+    indicacoes = Indicacao.objects.all().filter(added_by=request.user).order_by('-data_criacao')
+    return render(request, 'indicacoes/list.html', {'indicacoes': indicacoes})
