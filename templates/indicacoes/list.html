@@ -18,22 +18,32 @@
     <table class="striped">
     <thead>
       <tr>
+          {% if user.is_superuser %}
+          <th>Editar</th>
           <th>Indicação</th>
           <th>Valor</th>
           <th>Estatus</th>
-          {% if user.is_superuser %}
-          <th>Dono</th>
+          <th>Corretor</th>
+          {% else %}
+          <th>Indicação</th>
+          <th>Valor</th>
+          <th>Estatus</th>
           {% endif %}
       </tr>
     </thead>
     <tbody>
     {% for indicacao in indicacoes %}
       <tr>
+        {% if user.is_superuser %}
+        <td><a href="#" class="btn-floating btn-small"><i class="material-icons">mode_edit</i></a></td>
         <td>{{ indicacao.cliente }}</td>
         <td>{{ indicacao.valor }}</td>
         <td>{{ indicacao.status }}</td>
-        {% if user.is_superuser %}
         <td>{{ indicacao.added_by }}</td>
+        {% else %}
+        <td>{{ indicacao.cliente }}</td>
+        <td>{{ indicacao.valor }}</td>
+        <td>{{ indicacao.status }}</td>
         {% endif %}
       </tr>
     {% endfor %}
