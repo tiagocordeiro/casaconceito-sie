@@ -32,6 +32,7 @@ urlpatterns = [
     # re_path(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
     # url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', include('parceiros.urls')),
     path('', home_view, name='home'),
     # path('', index, name='parceiros_home'),
