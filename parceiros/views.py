@@ -1,7 +1,7 @@
+# from django.conf import settings
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.conf import settings
 from django.shortcuts import redirect
 from .forms import IndicacaoForm
 from .models import Indicacao
