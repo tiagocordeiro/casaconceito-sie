@@ -1,53 +1,63 @@
 {% extends "base_generic.html" %}
 
-{% block breadcrumb %}
-    <nav class="cc-breadcrumb">
-    <div class="container">
-    <div class="nav-wrapper">
-      <div class="col s12">
-        <a href="{% url 'home_parceiros' %}" class="breadcrumb">Dashboard</a>
-        <a href="{% url 'lista_indicacoes' %}" class="breadcrumb">Minhas Indicações</a>
-      </div>
-    </div>
-    </div>
-  </nav>
-{% endblock %}
+{#{% block breadcrumb %}#}
+{#    <nav class="cc-breadcrumb">#}
+{#    <div class="container">#}
+{#    <div class="nav-wrapper">#}
+{#      <div class="col s12">#}
+{#        <a href="{% url 'home_parceiros' %}" class="breadcrumb">Dashboard</a>#}
+{#        <a href="{% url 'lista_indicacoes' %}" class="breadcrumb">Minhas Indicações</a>#}
+{#      </div>#}
+{#    </div>#}
+{#    </div>#}
+{#  </nav>#}
+{#{% endblock %}#}
 
 {% block content %}
-    <div class="responsive-table">
-    <table class="striped">
-    <thead>
-      <tr>
-          {% if user.is_superuser %}
-          <th>Editar</th>
-          <th>Indicação</th>
-          <th>Valor</th>
-          <th>Estatus</th>
-          <th>Corretor</th>
-          {% else %}
-          <th>Indicação</th>
-          <th>Valor</th>
-          <th>Estatus</th>
-          {% endif %}
-      </tr>
-    </thead>
-    <tbody>
-    {% for indicacao in indicacoes %}
-      <tr>
-        {% if user.is_superuser %}
-        <td><a href="#" class="btn-floating btn-small"><i class="material-icons">mode_edit</i></a></td>
-        <td>{{ indicacao.cliente }}</td>
-        <td>{{ indicacao.valor }}</td>
-        <td>{{ indicacao.status }}</td>
-        <td>{{ indicacao.added_by }}</td>
-        {% else %}
-        <td>{{ indicacao.cliente }}</td>
-        <td>{{ indicacao.valor }}</td>
-        <td>{{ indicacao.status }}</td>
-        {% endif %}
-      </tr>
-    {% endfor %}
-    </tbody>
-    </table>
-    </div>
+            <table class="striped responsive-table"">
+            <thead>
+              <tr>
+                  {% if user.is_superuser %}
+                  <th>Indicação</th>
+                  <th>Valor</th>
+                  <th>Estatus</th>
+                  <th>Corretor</th>
+                  <th>&nbsp;</th>
+                  {% else %}
+                  <th>Indicação</th>
+                  <th>Valor</th>
+                  <th>Estatus</th>
+                  {% endif %}
+              </tr>
+            </thead>
+            <tbody>
+            {% for indicacao in indicacoes %}
+              <tr>
+                {% if user.is_superuser %}
+                <td>{{ indicacao.cliente }}</td>
+                <td>{{ indicacao.valor }}</td>
+                    {% if indicacao.status == "NOVO" %}
+                        <td><span class="new badge" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% elif indicacao.status == "EM ANDAMENTO" %}
+                        <td><span class="new badge blue" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% else %}
+                        <td><span class="new badge grey" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% endif %}
+                <td>{{ indicacao.added_by }}</td>
+                <td><a class="waves-effect waves-light btn-small"><i class="material-icons right">mode_edit</i>editar</a></td>
+                {% else %}
+                <td>{{ indicacao.cliente }}</td>
+                <td>{{ indicacao.valor }}</td>
+                    {% if indicacao.status == "NOVO" %}
+                        <td><span class="new badge" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% elif indicacao.status == "EM ANDAMENTO" %}
+                        <td><span class="new badge blue" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% else %}
+                        <td><span class="new badge grey" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% endif %}
+                {% endif %}
+              </tr>
+            {% endfor %}
+            </tbody>
+            </table>
 {% endblock %}
