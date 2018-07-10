@@ -1,3 +1,4 @@
+from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.conf import settings
@@ -6,10 +7,19 @@ from .forms import IndicacaoForm
 from .models import Indicacao
 
 
+@login_required
 def home_parceiros(request):
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
-    return render(request, 'index.html')
+    indicacoes_qt = Indicacao.objects.all().filter(added_by=request.user).count()
+    indicacoes_ganhas = Indicacao.objects.all()\
+        .filter(added_by=request.user)\
+        .filter(status='FECHADO').count()
+    total_ganho = Indicacao.objects.all()\
+        .filter(added_by=request.user)\
+        .filter(status='FECHADO').aggregate(Sum('valor'))
+    return render(request, 'index.html', {'indicacoes_qt': indicacoes_qt,
+                                          'indicacoes_ganhas': indicacoes_ganhas,
+                                          'total_ganho': total_ganho['valor__sum']})
+
 
 @login_required
 def adiciona_indicacao(request):
@@ -25,6 +35,7 @@ def adiciona_indicacao(request):
         form = IndicacaoForm()
 
     return render(request, 'indicacoes/new.html', {'form': form})
+
 
 @login_required
 def lista_indicacoes(request):
