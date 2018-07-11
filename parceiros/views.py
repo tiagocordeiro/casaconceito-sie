@@ -1,8 +1,9 @@
 # from django.conf import settings
+# from django.views.generic import UpdateView
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.contrib import messages
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import IndicacaoForm
 from .models import Indicacao
 
@@ -10,11 +11,11 @@ from .models import Indicacao
 @login_required
 def home_parceiros(request):
     indicacoes_qt = Indicacao.objects.all().filter(added_by=request.user).count()
-    indicacoes_ganhas = Indicacao.objects.all()\
-        .filter(added_by=request.user)\
+    indicacoes_ganhas = Indicacao.objects.all() \
+        .filter(added_by=request.user) \
         .filter(status='FECHADO').count()
-    total_ganho = Indicacao.objects.all()\
-        .filter(added_by=request.user)\
+    total_ganho = Indicacao.objects.all() \
+        .filter(added_by=request.user) \
         .filter(status='FECHADO').aggregate(Sum('valor'))
     return render(request, 'index.html', {'indicacoes_qt': indicacoes_qt,
                                           'indicacoes_ganhas': indicacoes_ganhas,
@@ -35,6 +36,33 @@ def adiciona_indicacao(request):
         form = IndicacaoForm()
 
     return render(request, 'indicacoes/new.html', {'form': form})
+
+
+@login_required
+def update_indicacao(request, pk):
+    indicacao = get_object_or_404(Indicacao, pk=pk)
+
+    if request.method == 'POST':
+        form = IndicacaoForm(request.POST, instance=indicacao)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, "A indicação foi atualizada")
+
+        except Exception as e:
+            # pass
+            messages.warning(request, 'Ocorreu um erro ao atualizar: {}'.format(e))
+
+    else:
+        form = IndicacaoForm(instance=indicacao)
+
+    contex = {
+        'form': form,
+        'indicacao': indicacao,
+    }
+
+    return render(request, 'indicacoes/indicacao_edit.html', contex)
 
 
 @login_required

@@ -44,7 +44,7 @@
             <td><span class="new badge grey" data-badge-caption="{{ indicacao.status }}"></span></td>
         {% endif %}
     <td>{{ indicacao.added_by }}</td>
-    <td><a class="waves-effect waves-light btn-small"><i class="material-icons right">mode_edit</i>editar</a></td>
+    <td><a href="{% url 'edit_indicacao' pk=indicacao.pk %}" class="waves-effect waves-light btn-small"><i class="material-icons right">mode_edit</i>editar</a></td>
     {% else %}
     <td>{{ indicacao.cliente }}</td>
     <td>{{ indicacao.valor }}</td>
