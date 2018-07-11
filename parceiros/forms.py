@@ -5,4 +5,5 @@ from .models import Indicacao
 class IndicacaoForm(ModelForm):
     class Meta:
         model = Indicacao
-        fields = ['cliente', 'descricao', ]
+        fields = ['cliente', 'descricao', 'email', 'telefone', 'celular', ]
+
