@@ -6,10 +6,10 @@
           <img style="height: 20px;" src="{% static "images/casa-conceito-logo.png" %}" alt="Casa Conceito">
       </a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="{% url 'home_parceiros' %}">Dashboard</a></li>
-        <li><a href="{% url 'lista_indicacoes' %}">Minhas Indicações</a></li>
-        <li><a href="{% url 'adiciona_indicacao' %}">Nova Indicação</a></li>
         {% if user.is_authenticated %}
+            <li><a href="{% url 'home_parceiros' %}">Dashboard</a></li>
+            <li><a href="{% url 'lista_indicacoes' %}">Minhas Indicações</a></li>
+            <li><a href="{% url 'adiciona_indicacao' %}">Nova Indicação</a></li>
             <li style="color: #5a5a5a;">Olá {{ user.get_username }}</li>
             <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
             {% else %}
@@ -18,10 +18,10 @@
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
-        <li><a href="{% url 'home_parceiros' %}">Dashboard</a></li>
-        <li><a href="{% url 'lista_indicacoes' %}">Minhas Indicações</a></li>
-        <li><a href="{% url 'adiciona_indicacao' %}">Nova Indicação</a></li>
         {% if user.is_authenticated %}
+            <li><a href="{% url 'home_parceiros' %}">Dashboard</a></li>
+            <li><a href="{% url 'lista_indicacoes' %}">Minhas Indicações</a></li>
+            <li><a href="{% url 'adiciona_indicacao' %}">Nova Indicação</a></li>
             <li><a href="#">{{ user.get_username }}</a></li>
             <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
             {% else %}
