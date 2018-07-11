@@ -11,6 +11,9 @@ class Indicacao(models.Model):
         ('PERDIDO', 'Perdido'),
     )
     cliente = models.CharField(max_length=200)
+    email = models.EmailField(blank=True, null=True)
+    telefone = models.CharField(max_length=15, blank=True, null=True)
+    celular = models.CharField(max_length=15, blank=True, null=True)
     descricao = models.TextField()
     valor = models.DecimalField(max_digits=11, decimal_places=2, default=0)
     data_criacao = models.DateTimeField(default=timezone.now)
