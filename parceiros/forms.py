@@ -8,6 +8,7 @@ class IndicacaoForm(ModelForm):
         fields = ['cliente', 'descricao', 'email', 'telefone',
                   'celular', ]
 
+
 class IndicacaoEditForm(ModelForm):
     class Meta:
         model = Indicacao
