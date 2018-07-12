@@ -6,7 +6,11 @@
     <div class="nav-wrapper">
       <div class="col s12">
         <a href="{% url 'home_parceiros' %}" class="breadcrumb">Dashboard</a>
-        <a href="{% url 'lista_indicacoes' %}" class="breadcrumb">Minhas Indicações</a>
+          {% if user.is_superuser %}
+            <a href="{% url 'lista_indicacoes' %}" class="breadcrumb">Todas Indicações</a>
+          {% else %}
+            <a href="{% url 'lista_indicacoes' %}" class="breadcrumb">Minhas Indicações</a>
+          {% endif %}
       </div>
     </div>
     </div>
@@ -19,14 +23,14 @@
   <tr>
       {% if user.is_superuser %}
       <th>Indicação</th>
-      <th>Valor</th>
-      <th>Estatus</th>
+      <th style="text-align: right">Valor</th>
+      <th style="text-align: center">Estatus</th>
       <th>Corretor</th>
       <th>&nbsp;</th>
       {% else %}
       <th>Indicação</th>
-      <th>Valor</th>
-      <th>Estatus</th>
+      <th style="text-align: right">Valor</th>
+      <th style="text-align: center">Status</th>
       {% endif %}
   </tr>
 </thead>
@@ -35,25 +39,25 @@
   <tr>
     {% if user.is_superuser %}
     <td>{{ indicacao.cliente }}</td>
-    <td>{{ indicacao.valor }}</td>
+    <td style="text-align: right">{{ indicacao.valor }}</td>
         {% if indicacao.status == "NOVO" %}
-            <td><span class="new badge" data-badge-caption="{{ indicacao.status }}"></span></td>
+            <td style="text-align: center"><span class="new badge" data-badge-caption="{{ indicacao.status }}"></span></td>
         {% elif indicacao.status == "EM ANDAMENTO" %}
-            <td><span class="new badge blue" data-badge-caption="{{ indicacao.status }}"></span></td>
+            <td style="text-align: center"><span class="new badge blue" data-badge-caption="{{ indicacao.status }}"></span></td>
         {% else %}
-            <td><span class="new badge grey" data-badge-caption="{{ indicacao.status }}"></span></td>
+            <td style="text-align: center"><span class="new badge grey" data-badge-caption="{{ indicacao.status }}"></span></td>
         {% endif %}
     <td>{{ indicacao.added_by }}</td>
     <td><a href="{% url 'edit_indicacao' pk=indicacao.pk %}" class="waves-effect waves-light btn-small"><i class="material-icons right">mode_edit</i>editar</a></td>
     {% else %}
     <td>{{ indicacao.cliente }}</td>
-    <td>{{ indicacao.valor }}</td>
+    <td style="text-align: right">{{ indicacao.valor }}</td>
         {% if indicacao.status == "NOVO" %}
-            <td><span class="new badge" data-badge-caption="{{ indicacao.status }}"></span></td>
+            <td style="text-align: center"><span class="new badge" data-badge-caption="{{ indicacao.status }}"></span></td>
         {% elif indicacao.status == "EM ANDAMENTO" %}
-            <td><span class="new badge blue" data-badge-caption="{{ indicacao.status }}"></span></td>
+            <td style="text-align: center"><span class="new badge blue" data-badge-caption="{{ indicacao.status }}"></span></td>
         {% else %}
-            <td><span class="new badge grey" data-badge-caption="{{ indicacao.status }}"></span></td>
+            <td style="text-align: center"><span class="new badge grey" data-badge-caption="{{ indicacao.status }}"></span></td>
         {% endif %}
     {% endif %}
   </tr>

@@ -26,6 +26,16 @@
     {% endfor %}
 {% endif %}
 
+
+<div class="row">
+    <div class="col s12">
+        <span class="new badge" data-badge-caption="{{ indicacao.status }}">Status:</span>
+        <span class="new badge" data-badge-caption="{{ indicacao.data_criacao | date }}">Incluido:</span>
+        <span class="new badge" data-badge-caption="{{ indicacao.added_by }}">Corretor:</span>
+    </div>
+</div>
+
+
 <form class="col s12" method="post" action="{% url 'edit_indicacao' pk=indicacao.pk %}">
 {% csrf_token %}
 
@@ -40,38 +50,46 @@
         <i class="material-icons prefix">email</i>
         {{ form.email }}
         {{ form.email.label_tag }}
-{#        <input id="icon_email" type="email" class="validate">#}
-{#        <label for="icon_telephone">Telefone</label>#}
     </div>
 </div>
 <div class="row">
     <div class="input-field col s12 m6 l6">
-        <i class="material-icons prefix">account_circle</i>
+        <i class="material-icons prefix">phone</i>
         {{ form.telefone }}
         {{ form.telefone.label_tag }}
     </div>
     <div class="input-field col s12 m6 l6">
-        <i class="material-icons prefix">phone</i>
+        <i class="material-icons prefix">phone_android</i>
         {{ form.celular }}
         {{ form.celular.label_tag }}
     </div>
 </div>
 <div class="row">
     <div class="input-field col s12">
-{#        {{ form.descricao }}#}
         <i class="material-icons prefix">mode_edit</i>
         <textarea id="id_descricao" name="descricao" class="materialize-textarea"> {{ indicacao.descricao }}</textarea>
         {{ form.descricao.label_tag }}
     </div>
 </div>
 <div class="row">
-    <input type="hidden" name="added_by" value="{{ request.user }}" />
-</div>
-<div>
-    {#  <input type="submit" value="login" class="btn waves-effect waves-light right" />#}
+  {% if request.user.is_superuser %}
+      <div class="input-field col s6">
+        {{ form.status }}
+        {{ form.status.label_tag }}
+      </div>
+      <div class="input-field col s6">
+        {{ form.valor }}
+        {{ form.valor.label_tag }}
+      </div>
+  {% else %}
+
+  {% endif %}
+
+  <div class="input-field col s12">
     <button class="btn waves-effect waves-light right" type="submit" value="adiciona_indicacao" name="adiciona_indicacao">
         Atualizar <i class="material-icons right">send</i>
     </button>
+  </div>
 </div>
 </form>
 

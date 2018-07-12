@@ -4,7 +4,7 @@ from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import IndicacaoForm
+from .forms import IndicacaoForm, IndicacaoEditForm
 from .models import Indicacao
 
 
@@ -43,7 +43,7 @@ def update_indicacao(request, pk):
     indicacao = get_object_or_404(Indicacao, pk=pk)
 
     if request.method == 'POST':
-        form = IndicacaoForm(request.POST, instance=indicacao)
+        form = IndicacaoEditForm(request.POST, instance=indicacao)
 
         try:
             if form.is_valid():
@@ -55,7 +55,7 @@ def update_indicacao(request, pk):
             messages.warning(request, 'Ocorreu um erro ao atualizar: {}'.format(e))
 
     else:
-        form = IndicacaoForm(instance=indicacao)
+        form = IndicacaoEditForm(instance=indicacao)
 
     contex = {
         'form': form,
