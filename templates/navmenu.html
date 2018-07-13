@@ -1,5 +1,15 @@
 {% load static %}
 {% load parceiros_extras %}
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a onclick="M.toast({html: 'Em breve'})" href="#!">Perfil</a></li>
+  <li><a onclick="M.toast({html: 'Em breve'})" href="#!">Relatórios</a></li>
+  <li><a href="/accounts/password_change/">Alterar senha</a></li>
+  <li class="divider"></li>
+  <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+</ul>
+
 <div class="navbar-fixed">
   <nav class="black" role="navigation">
     <div class="nav-wrapper container">
@@ -19,8 +29,9 @@
             {% else %}
 
             {% endif %}
-            <li style="color: #c3b945;">Olá {{ user.get_username }}</li>
-            <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+            <!-- Dropdown Trigger -->
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Olá {{ user.get_username }}<i class="material-icons right">arrow_drop_down</i></a></li>
+            <!-- <li style="color: #c3b945;">Olá {{ user.get_username }}</li> -->
         {% else %}
             <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
         {% endif %}

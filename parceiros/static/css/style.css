@@ -7,7 +7,7 @@
  */
 
 nav ul a, nav .brand-logo {
-  color: #d4c470;
+  color: #d4c470 !important;
 }
 
 p {
@@ -139,5 +139,16 @@ footer.page-footer {
 }
 
 nav ul a:hover {
+    background-color: rgb(69, 49, 29);
+}
+
+.dropdown-content {
+    color: #5a512b;
+    background-color: black !important;
+}
+
+.divider {
+    height: 1px;
+    overflow: hidden;
     background-color: rgb(69, 49, 29);
 }
