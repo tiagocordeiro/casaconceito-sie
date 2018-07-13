@@ -142,12 +142,16 @@ nav ul a:hover {
     background-color: rgb(69, 49, 29);
 }
 
-.dropdown-content {
-    color: #5a512b;
-    background-color: black !important;
+#dropdown1 {
+  color: #d4c470 !important;
+  background: #000000 !important;
 }
 
-.divider {
+#nav-mobile {
+  background-color: #000000 !important;
+}
+
+#dropdown1 .divider {
     height: 1px;
     overflow: hidden;
     background-color: rgb(69, 49, 29);
