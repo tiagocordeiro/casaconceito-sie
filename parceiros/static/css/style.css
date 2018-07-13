@@ -137,3 +137,7 @@ footer.page-footer {
 .tag:hover::after {
    border-left-color: crimson;
 }
+
+nav ul a:hover {
+    background-color: rgb(69, 49, 29);
+}

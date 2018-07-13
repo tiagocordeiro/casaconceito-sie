@@ -19,7 +19,7 @@
             {% else %}
 
             {% endif %}
-            <li style="color: #5a5a5a;">Olá {{ user.get_username }}</li>
+            <li style="color: #c3b945;">Olá {{ user.get_username }}</li>
             <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
         {% else %}
             <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
