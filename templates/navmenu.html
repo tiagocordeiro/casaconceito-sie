@@ -19,7 +19,6 @@
             {% else %}
 
             {% endif %}
-
             <li style="color: #5a5a5a;">Olá {{ user.get_username }}</li>
             <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
         {% else %}
@@ -30,8 +29,16 @@
       <ul id="nav-mobile" class="sidenav">
         {% if user.is_authenticated %}
             <li><a href="{% url 'home_parceiros' %}">Dashboard</a></li>
-            <li><a href="{% url 'lista_indicacoes' %}">Minhas Indicações</a></li>
-            <li><a href="{% url 'adiciona_indicacao' %}">Nova Indicação</a></li>
+            {% if user.is_superuser %}
+                <li><a href="{% url 'lista_indicacoes' %}">Todas Indicações</a></li>
+            {% else %}
+                <li><a href="{% url 'lista_indicacoes' %}">Minhas Indicações</a></li>
+            {% endif %}
+            {% if request.user|has_group:"Corretor" %}
+                <li><a href="{% url 'adiciona_indicacao' %}">Nova Indicação</a></li>
+            {% else %}
+
+            {% endif %}
             <li><a href="#">{{ user.get_username }}</a></li>
             <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
             {% else %}
