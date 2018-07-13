@@ -10,6 +10,7 @@ from .models import Indicacao
 
 @login_required
 def home_parceiros(request):
+    indicacoes = Indicacao.objects.all().filter(added_by=request.user).order_by('-data_criacao')
     indicacoes_qt = Indicacao.objects.all().filter(added_by=request.user).count()
     indicacoes_ganhas = Indicacao.objects.all() \
         .filter(added_by=request.user) \
@@ -19,7 +20,8 @@ def home_parceiros(request):
         .filter(status='FECHADO').aggregate(Sum('valor'))
     return render(request, 'index.html', {'indicacoes_qt': indicacoes_qt,
                                           'indicacoes_ganhas': indicacoes_ganhas,
-                                          'total_ganho': total_ganho['valor__sum']})
+                                          'total_ganho': total_ganho['valor__sum'],
+                                          'indicacoes': indicacoes, })
 
 
 @login_required

@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,50 +22,50 @@
     <div class="section">
 
       <div class="row">
-        <div class="col s12 m4">
+        <div class="col s12 m6 l4">
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
-                <h2 class="center lighten-1">{{ indicacoes_qt }}</h2>
+                <h3 class="center lighten-1">{{ indicacoes_qt }}</h3>
                 <div class="icon-block">
                    <p class="center">Indicações</p>
                    <h2 class="center lighten-1"><i class="material-icons">flash_on</i></h2>
                 </div>
-                <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                <a href="{% url 'adiciona_indicacao' %}" class="btn-floating halfway-fab waves-effect waves-light"><i class="material-icons">add</i></a>
             </div>
             <div class="card-action">
-              <a href="#">Adicionar</a>
+              <a href="{% url 'adiciona_indicacao' %}">Adicionar</a>
             </div>
           </div>
         </div>
 
-        <div class="col s12 m4">
+        <div class="col s12 m6 l4">
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
-                <h2 class="center lighten-1">{{ indicacoes_ganhas }}</h2>
+                <h3 class="center lighten-1">{{ indicacoes_ganhas }}</h3>
                 <div class="icon-block">
                    <p class="center">Indicações Ganhas</p>
-                   <h2 class="center lighten-1"><i class="material-icons">group</i></h2>
+                   <h2 class="center lighten-1"><i class="material-icons">assistant_photo</i></h2>
                 </div>
 
             </div>
             <div class="card-action">
-              <a href="#">This is a link</a>
+              <a href="{% url 'lista_indicacoes' %}">Indicações</a>
             </div>
           </div>
         </div>
 
-        <div class="col s12 m4">
+        <div class="col s12 m6 l4">
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
-                <h4 class="center lighten-1">{{ total_ganho }}</h4>
+                <h3 class="center lighten-1">{{ total_ganho|intcomma }}</h3>
                 <div class="icon-block">
                    <p class="center">R$ Ganhos</p>
-                   <h2 class="center lighten-1"><i class="material-icons">group</i></h2>
+                   <h2 class="center lighten-1"><i class="material-icons">attach_money</i></h2>
                 </div>
 
             </div>
             <div class="card-action">
-              <a href="#">This is a link</a>
+              <a onclick="M.toast({html: 'Em breve'})" href="#">Relatório</a>
             </div>
           </div>
         </div>
@@ -79,9 +80,52 @@
 
       <div class="row">
         <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Resumo</h4>
-          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+          <table class="striped responsive-table">
+            <thead>
+              <tr>
+                  {% if user.is_superuser %}
+                  <th>Indicação</th>
+                  <th style="text-align: right">Valor</th>
+                  <th style="text-align: center">Estatus</th>
+                  <th>Corretor</th>
+                  <th>&nbsp;</th>
+                  {% else %}
+                  <th>Indicação</th>
+                  <th style="text-align: right">Valor</th>
+                  <th style="text-align: center">Status</th>
+                  {% endif %}
+              </tr>
+            </thead>
+            <tbody>
+            {% for indicacao in indicacoes %}
+              <tr>
+                {% if user.is_superuser %}
+                <td>{{ indicacao.cliente }}</td>
+                <td style="text-align: right">{{ indicacao.valor }}</td>
+                    {% if indicacao.status == "NOVO" %}
+                        <td style="text-align: center"><span class="new badge" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% elif indicacao.status == "EM ANDAMENTO" %}
+                        <td style="text-align: center"><span class="new badge blue" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% else %}
+                        <td style="text-align: center"><span class="new badge grey" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% endif %}
+                <td>{{ indicacao.added_by }}</td>
+                <td><a href="{% url 'edit_indicacao' pk=indicacao.pk %}" class="waves-effect waves-light btn-small"><i class="material-icons right">mode_edit</i>editar</a></td>
+                {% else %}
+                <td>{{ indicacao.cliente }}</td>
+                <td style="text-align: right">{{ indicacao.valor }}</td>
+                    {% if indicacao.status == "NOVO" %}
+                        <td style="text-align: center"><span class="new badge" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% elif indicacao.status == "EM ANDAMENTO" %}
+                        <td style="text-align: center"><span class="new badge blue" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% else %}
+                        <td style="text-align: center"><span class="new badge grey" data-badge-caption="{{ indicacao.status }}"></span></td>
+                    {% endif %}
+                {% endif %}
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
 
