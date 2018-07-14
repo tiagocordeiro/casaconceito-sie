@@ -9,8 +9,8 @@ class IndicacaoForm(ModelForm):
                   'celular', ]
 
         widgets = {
-            'telefone': TextInput(attrs={'class': 'phone', 'type': 'tel'}),
-            'celular': TextInput(attrs={'class': 'phone', 'type': 'tel'})
+            'telefone': TextInput(attrs={'class': 'phone', 'type': 'tel', }),
+            'celular': TextInput(attrs={'class': 'phone', 'type': 'tel', })
         }
 
 
@@ -19,3 +19,8 @@ class IndicacaoEditForm(ModelForm):
         model = Indicacao
         fields = ['cliente', 'descricao', 'email', 'telefone',
                   'celular', 'status', 'valor', ]
+
+        widgets = {
+            'telefone': TextInput(attrs={'class': 'phone', 'type': 'tel', }),
+            'celular': TextInput(attrs={'class': 'phone', 'type': 'tel', })
+        }

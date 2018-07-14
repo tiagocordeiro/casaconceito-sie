@@ -28,15 +28,10 @@
   </div>
 
   <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="{% static "js/materialize.js" %}"></script>
   <script src="{% static "js/init.js" %}"></script>
-
-  <script>
-  $(document).ready(function(){
-      $('select').formSelect();
-  });
-  </script>
+  <script src="{% static "js/jquery.mask.js" %}"></script>
 
   {% block extrascripts %}
   {% endblock %}
