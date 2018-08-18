@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AnonymousUser, User
+from django.contrib.auth.models import AnonymousUser, User, Group
 from django.test import RequestFactory, TestCase
 from django.utils import timezone
 
@@ -12,6 +12,8 @@ class ParceirosViewsTest(TestCase):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
         self.user = User.objects.create_user(username='jacob', email='jacob@…', password='top_secret')
+        self.group = Group.objects.create(name='Corretor')
+        self.group.user_set.add(self.user)
 
     def test_lista_indicacoes_anonimo(self):
         request = self.factory.get('/indicacoes')
@@ -47,6 +49,8 @@ class IndicacoesTest(TestCase):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
         self.user = User.objects.create_user(username='jacob', email='jacob@…', password='top_secret')
+        self.group = Group.objects.create(name='Corretor')
+        self.group.user_set.add(self.user)
 
     def create_indicacao(self, cliente="Cliente Teste", descricao="Descrição teste"):
         return Indicacao.objects.create(cliente=cliente, descricao=descricao, data_criacao=timezone.now(),
@@ -62,6 +66,8 @@ class IndicacoesFormTest(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.user = User.objects.create_user(username='jacob', email='jacob@…', password='top_secret')
+        self.group = Group.objects.create(name='Corretor')
+        self.group.user_set.add(self.user)
 
     def test_valid_form(self):
         i = Indicacao.objects.create(cliente='Foo', descricao='Bar')
