@@ -17,6 +17,7 @@ before_script:
   - python manage.py migrate --noinput
 # command to run tests
 script:
+  - pycodestyle casaconceito/ parceiros/ pages/
   - python manage.py test -v 2
 #  - flake8 casaconceito/ parceiros/ pages/
 #  - py.test --cov=pytocli tests/
