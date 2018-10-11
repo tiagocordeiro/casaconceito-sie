@@ -153,6 +153,11 @@ COLLECTFAST_ENABLED = False
 # Configure Django App for Heroku.
 django_heroku.settings(locals())
 
+# Force ssl
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
 # Configure Email
 EMAIL_HOST = config('EMAIL_HOST', default='localhost')
 EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
