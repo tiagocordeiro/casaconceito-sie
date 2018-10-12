@@ -1,0 +1,100 @@
+{% extends "dadmin/base.html" %}
+{% load static %}
+
+{% block title %}Dashboard - S.I.E.{% endblock %}
+{% block page-title %}Dashboard{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">S.I.E.</a></li>
+    <li class="breadcrumb-item active"><span>Dashboard</span></li>
+{% endblock %}
+
+{% block content %}
+<section class="main--content">
+    <div class="row gutter-20">
+        <div class="col-md-4">
+            <div class="panel">
+                <!-- Mini Stats Panel Start -->
+                <div class="miniStats--panel">
+                    <div class="miniStats--header bg-darker">
+                        <p class="miniStats--caption text-blue">Plotter</p>
+
+                        <p class="miniStats--label text-white bg-blue">
+                            <a class="text-white" href="#">
+                                <i class="fa fa-list"></i>
+                                <span>10</span>
+                            </a>
+                        </p>
+                    </div>
+
+
+                    <div class="miniStats--body">
+                        <i class="miniStats--icon fa fa-user text-blue"></i>
+
+                        <p class="miniStats--caption text-blue">Contratos</p>
+                        <P><br></P>
+                        <a href="#" class="btn btn-sm btn-outline-info">Adicionar Novo</a>
+                    </div>
+                </div>
+                <!-- Mini Stats Panel End -->
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel">
+                <!-- Mini Stats Panel Start -->
+                <div class="miniStats--panel">
+                    <div class="miniStats--header bg-darker">
+                        <p class="miniStats--caption text-orange">Router</p>
+
+
+                        <p class="miniStats--label text-white bg-orange">
+                            <a class="text-white" href="#">
+                                <i class="fa fa-list"></i>
+                                <span>10</span>
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="miniStats--body">
+                        <i class="miniStats--icon fa fa-ticket-alt text-orange"></i>
+
+                        <p class="miniStats--caption text-orange">Contratos</p>
+                        <br>
+                        <a href="#" class="btn btn-sm btn-outline-warning">Adicionar Novo</a>
+                    </div>
+                </div>
+                <!-- Mini Stats Panel End -->
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel">
+                <!-- Mini Stats Panel Start -->
+                <div class="miniStats--panel">
+                    <div class="miniStats--header bg-darker">
+                        <p class="miniStats--caption text-green">Laser</p>
+
+                        <p class="miniStats--label text-white bg-green">
+                            <a class="text-white" href="#">
+                                <i class="fa fa-list"></i>
+                                <span>10</span>
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="miniStats--body">
+                        <i class="miniStats--icon fa fa-rocket text-green"></i>
+
+                        <p class="miniStats--caption text-green">Contratos</p>
+                        <br>
+                        <a href="#" class="btn btn-sm btn-outline-success">Adicionar Novo</a>
+                    </div>
+                </div>
+                <!-- Mini Stats Panel End -->
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
