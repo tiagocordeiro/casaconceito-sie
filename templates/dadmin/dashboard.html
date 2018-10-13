@@ -1,5 +1,6 @@
 {% extends "dadmin/base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}Dashboard - S.I.E.{% endblock %}
 {% block page-title %}Dashboard{% endblock %}
@@ -17,12 +18,12 @@
                 <!-- Mini Stats Panel Start -->
                 <div class="miniStats--panel">
                     <div class="miniStats--header bg-darker">
-                        <p class="miniStats--caption text-blue">Plotter</p>
+                        <p class="miniStats--caption text-blue">Indicações</p>
 
                         <p class="miniStats--label text-white bg-blue">
                             <a class="text-white" href="#">
                                 <i class="fa fa-list"></i>
-                                <span>10</span>
+                                <span>{{ indicacoes_qt }}</span>
                             </a>
                         </p>
                     </div>
@@ -31,9 +32,9 @@
                     <div class="miniStats--body">
                         <i class="miniStats--icon fa fa-user text-blue"></i>
 
-                        <p class="miniStats--caption text-blue">Contratos</p>
+                        <p class="miniStats--caption text-blue">Leads</p>
                         <P><br></P>
-                        <a href="#" class="btn btn-sm btn-outline-info">Adicionar Novo</a>
+                        <a href="{% url 'adiciona_indicacao' %}" class="btn btn-sm btn-outline-info">Adicionar Novo</a>
                     </div>
                 </div>
                 <!-- Mini Stats Panel End -->
@@ -45,23 +46,23 @@
                 <!-- Mini Stats Panel Start -->
                 <div class="miniStats--panel">
                     <div class="miniStats--header bg-darker">
-                        <p class="miniStats--caption text-orange">Router</p>
+                        <p class="miniStats--caption text-orange">Indicações Ganhas</p>
 
 
                         <p class="miniStats--label text-white bg-orange">
                             <a class="text-white" href="#">
                                 <i class="fa fa-list"></i>
-                                <span>10</span>
+                                <span>{{ indicacoes_ganhas }}</span>
                             </a>
                         </p>
                     </div>
 
                     <div class="miniStats--body">
-                        <i class="miniStats--icon fa fa-ticket-alt text-orange"></i>
+                        <i class="miniStats--icon fa fa-rocket text-orange"></i>
 
-                        <p class="miniStats--caption text-orange">Contratos</p>
+                        <p class="miniStats--caption text-orange">Leads</p>
                         <br>
-                        <a href="#" class="btn btn-sm btn-outline-warning">Adicionar Novo</a>
+                        <a href="#" class="btn btn-sm btn-outline-warning">Indicações</a>
                     </div>
                 </div>
                 <!-- Mini Stats Panel End -->
@@ -73,22 +74,22 @@
                 <!-- Mini Stats Panel Start -->
                 <div class="miniStats--panel">
                     <div class="miniStats--header bg-darker">
-                        <p class="miniStats--caption text-green">Laser</p>
+                        <p class="miniStats--caption text-green">R$ Ganhos</p>
 
                         <p class="miniStats--label text-white bg-green">
                             <a class="text-white" href="#">
-                                <i class="fa fa-list"></i>
-                                <span>10</span>
+                                <i class="fa fa-money-bill-alt"></i>
+                                <span>{{ total_ganho|default_if_none:"0"|intcomma }}</span>
                             </a>
                         </p>
                     </div>
 
                     <div class="miniStats--body">
-                        <i class="miniStats--icon fa fa-rocket text-green"></i>
+                        <i class="miniStats--icon fa fa-dollar-sign text-green"></i>
 
-                        <p class="miniStats--caption text-green">Contratos</p>
+                        <p class="miniStats--caption text-green">Comissão</p>
                         <br>
-                        <a href="#" class="btn btn-sm btn-outline-success">Adicionar Novo</a>
+                        <a href="#" class="btn btn-sm btn-outline-success">Relatórios</a>
                     </div>
                 </div>
                 <!-- Mini Stats Panel End -->
