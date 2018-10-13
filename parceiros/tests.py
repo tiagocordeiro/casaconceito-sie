@@ -2,7 +2,7 @@ from django.contrib.auth.models import AnonymousUser, User, Group
 from django.test import RequestFactory, TestCase
 from django.utils import timezone
 
-from .views import lista_indicacoes, home_parceiros
+from .views import indicacao_list_dadmin, dashboard
 from .models import Indicacao
 from .forms import IndicacaoForm
 
@@ -19,28 +19,28 @@ class ParceirosViewsTest(TestCase):
         request = self.factory.get('/indicacoes')
         request.user = AnonymousUser()
 
-        response = lista_indicacoes(request)
+        response = indicacao_list_dadmin(request)
         self.assertEqual(response.status_code, 302)
 
     def test_lista_indicacoes_logado(self):
         request = self.factory.get('/indicacoes')
         request.user = self.user
 
-        response = lista_indicacoes(request)
+        response = indicacao_list_dadmin(request)
         self.assertEqual(response.status_code, 200)
 
     def test_dashboard_parceiro_anonimo(self):
         request = self.factory.get('/')
         request.user = AnonymousUser()
 
-        response = home_parceiros(request)
+        response = dashboard(request)
         self.assertEqual(response.status_code, 302)
 
     def test_dashboard_parceiro_logado(self):
         request = self.factory.get('/')
         request.user = self.user
 
-        response = home_parceiros(request)
+        response = dashboard(request)
         self.assertEqual(response.status_code, 200)
 
 
