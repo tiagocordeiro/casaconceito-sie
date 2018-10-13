@@ -1,12 +1,14 @@
 # from django.conf import settings
 # from django.views.generic import UpdateView
+# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.forms.models import inlineformset_factory
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import IndicacaoForm, IndicacaoEditForm, UserProfileForm, ProfileForm
+from .forms import IndicacaoForm, IndicacaoEditForm, UserProfileForm, ProfileForm, SignUpForm
 from .models import Indicacao, UserProfile
 
 
@@ -254,3 +256,18 @@ def indicacao_edit_dadmin(request, pk):
     }
 
     return render(request, 'dadmin/indicacao_edit.html', contex)
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('dashboard')
+    else:
+        form = SignUpForm()
+    return render(request, 'registration/signup.html', {'form': form})
