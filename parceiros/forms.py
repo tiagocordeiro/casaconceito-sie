@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput
+from django.forms import ModelForm, TextInput, EmailInput, Textarea, Select
 from django.contrib.auth.models import User
 from .models import UserProfile
 from .models import Indicacao
@@ -11,8 +11,11 @@ class IndicacaoForm(ModelForm):
                   'celular', ]
 
         widgets = {
-            'telefone': TextInput(attrs={'class': 'phone', 'type': 'tel', }),
-            'celular': TextInput(attrs={'class': 'phone', 'type': 'tel', })
+            'cliente': TextInput(attrs={'class': 'form-control', 'placeholder': 'Cliente'}),
+            'email': EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+            'telefone': TextInput(attrs={'class': 'form-control phone', 'type': 'tel', }),
+            'celular': TextInput(attrs={'class': 'form-control phone', 'type': 'tel', }),
+            'descricao': Textarea(attrs={'class': 'form-control', })
         }
 
 
@@ -23,8 +26,13 @@ class IndicacaoEditForm(ModelForm):
                   'celular', 'status', 'valor', ]
 
         widgets = {
-            'telefone': TextInput(attrs={'class': 'phone', 'type': 'tel', }),
-            'celular': TextInput(attrs={'class': 'phone', 'type': 'tel', })
+            'cliente': TextInput(attrs={'class': 'form-control', 'placeholder': 'Cliente'}),
+            'email': EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+            'telefone': TextInput(attrs={'class': 'form-control phone', 'type': 'tel', }),
+            'celular': TextInput(attrs={'class': 'form-control phone', 'type': 'tel', }),
+            'descricao': Textarea(attrs={'class': 'form-control', }),
+            'status': Select(attrs={'class': 'form-control', }),
+            'valor': TextInput(attrs={'class': 'form-control', }),
         }
 
 

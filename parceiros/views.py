@@ -180,7 +180,77 @@ def dashboard_demo(request):
         .filter(added_by=request.user) \
         .filter(status='FECHADO').aggregate(Sum('valor'))
     return render(request, 'dadmin/dashboard_demo.html', {'indicacoes_qt': indicacoes_qt,
-                                                               'indicacoes_ganhas': indicacoes_ganhas,
-                                                               'total_ganho': total_ganho['valor__sum'],
-                                                               'indicacoes': indicacoes,
-                                                               'usuario': usuario, })
+                                                          'indicacoes_ganhas': indicacoes_ganhas,
+                                                          'total_ganho': total_ganho['valor__sum'],
+                                                          'indicacoes': indicacoes,
+                                                          'usuario': usuario, })
+
+
+@login_required
+def indicacao_list_dadmin(request):
+    if request.user.is_superuser:
+        indicacoes = Indicacao.objects.all().order_by('-data_criacao')
+    else:
+        indicacoes = Indicacao.objects.all().filter(added_by=request.user).order_by('-data_criacao')
+
+    try:
+        usuario = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        usuario = None
+
+    return render(request, 'dadmin/indicacao_list.html', {'indicacoes': indicacoes,
+                                                          'usuario': usuario, })
+
+
+@login_required
+def indicacao_add_dadmin(request):
+    try:
+        usuario = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        usuario = None
+
+    if request.method == 'POST':
+        form = IndicacaoForm(request.POST)
+        if form.is_valid():
+            indicacao = form.save(commit=False)
+            indicacao.added_by = request.user
+            indicacao.save()
+            return redirect(indicacao_list_dadmin)
+
+    else:
+        form = IndicacaoForm()
+
+    return render(request, 'dadmin/indicacao_new.html', {'form': form,
+                                                         'usuario': usuario, })
+
+
+@login_required
+def indicacao_edit_dadmin(request, pk):
+    try:
+        usuario = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        usuario = None
+
+    indicacao = get_object_or_404(Indicacao, pk=pk)
+
+    if request.method == 'POST':
+        form = IndicacaoEditForm(request.POST, instance=indicacao)
+
+        try:
+            if form.is_valid():
+                form.save()
+                messages.success(request, "A indicação foi atualizada")
+
+        except Exception as e:
+            messages.warning(request, 'Ocorreu um erro ao atualizar: {}'.format(e))
+
+    else:
+        form = IndicacaoEditForm(instance=indicacao)
+
+    contex = {
+        'form': form,
+        'indicacao': indicacao,
+        'usuario': usuario,
+    }
+
+    return render(request, 'dadmin/indicacao_edit.html', contex)
