@@ -13,6 +13,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('profile/update/', views.profile_update, name='profile_update'),
     path('profile/avatar/', views.avatar_update, name='avatar_update'),
+    path('signup/', views.signup, name='signup'),
     # path('indicacao/add/', views.adiciona_indicacao, name='adiciona_indicacao'),
     # path('indicacao/edit/<pk>/', views.update_indicacao, name='edit_indicacao'),
     # path('indicacoes/', views.lista_indicacoes, name='lista_indicacoes'),
