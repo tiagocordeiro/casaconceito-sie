@@ -456,3 +456,4 @@ ASALocalRun/
 
 # VScode
 .vscode/
+/newrelic.ini
