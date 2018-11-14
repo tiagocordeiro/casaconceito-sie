@@ -28,12 +28,15 @@ from casaconceito import settings
 admin.site.site_header = 'Casa Conceito'
 
 urlpatterns = [
-    # re_path(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
-    # re_path(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
-    # url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('parceiros.urls')),
     # path('', home_view, name='home'),
     # path('', index, name='parceiros_home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__', include(debug_toolbar.urls)),
+    ] + urlpatterns
