@@ -1,1 +1,1 @@
-web: newrelic-admin run-program gunicorn casaconceito.wsgi
+web: gunicorn casaconceito.wsgi
