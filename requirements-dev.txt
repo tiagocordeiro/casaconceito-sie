@@ -2,4 +2,8 @@ mccabe==0.6.1
 pycodestyle==2.4.0
 pyflakes==2.0.0
 
+# DebugToolbar
+django-debug-toolbar==1.10.1
+sqlparse==0.2.4
+
 -r requirements.txt
