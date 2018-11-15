@@ -1339,7 +1339,7 @@ a.star-icon.is-stared:before {
 .nav > li > a.btn-primary:hover,
 .nav > li > a.btn-primary:focus,
 .nav > li.active > a.btn-primary {
-    background-color: #745faa;
+    background-color: #86733e;
 }
 
 .btn-success,
@@ -3036,8 +3036,8 @@ tr:first-child > td > .fc-day-grid-event {
     display: flex;
     min-height: 100%;
     padding: 60px 30px;
-    color: #fff;
-    background-color: #acacac;
+    color: #c5ab5f;
+    background-color: #000000c7;
     -ms-flex-pack: center;
     -webkit-box-pack: center;
             justify-content: center;
@@ -3118,7 +3118,7 @@ tr:first-child > td > .fc-day-grid-event {
 
 .m-account--title {
     margin-bottom: 33px;
-    color: #2bb3c0;
+    color: #c5ab5f;
     font-size: 18px;
     line-height: 28px;
     text-align: center;

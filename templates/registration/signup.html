@@ -4,12 +4,12 @@
 {% block content %}
 <div class="wrapper">
     <!-- Login Page Start -->
-    <div class="m-account-w" data-bg-img="{% static 'assets/img/account/wrapper-bg.jpg' %}">
+    <div class="m-account-w" data-bg-img="{% static 'images/decor-bg.jpg' %}">
         <div class="m-account">
             <div class="row no-gutters">
                 <div class="col-md-6">
                     <!-- Login Content Start -->
-                    <div class="m-account--content-w" data-bg-img="{% static 'assets/img/account/content-bg.jpg' %}">
+                    <div class="m-account--content-w" {# data-bg-img="{% static 'assets/img/account/content-bg.jpg' %}" #}>
                         <div class="m-account--content">
 
                             {% if form.username.errors %}
@@ -60,7 +60,7 @@
                         <div class="m-account--form">
                             <!-- Logo Start -->
                             <div class="logo">
-                                <img src="{% static 'assets/img/logo.png' %}" alt="">
+                                <img src="{% static 'images/casa-conceito-logo.png' %}" alt="">
                             </div>
                             <!-- Logo End -->
 
@@ -108,7 +108,7 @@
                                 </div>
 
                                 <div class="m-account--actions">
-                                    <button type="submit" value="signup" class="btn btn-rounded btn-info" name="signup">Cadastrar</button>
+                                    <button type="submit" value="signup" class="btn btn-rounded btn-primary" name="signup">Cadastrar</button>
                                 </div>
 
                                 <div class="m-account--footer">

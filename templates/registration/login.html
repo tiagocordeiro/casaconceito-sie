@@ -4,12 +4,12 @@
 {% block content %}
 <div class="wrapper">
     <!-- Login Page Start -->
-    <div class="m-account-w" data-bg-img="{% static 'assets/img/account/wrapper-bg.jpg' %}">
+    <div class="m-account-w" data-bg-img="{% static 'images/decor-bg.jpg' %}">
         <div class="m-account">
             <div class="row no-gutters">
                 <div class="col-md-6">
                     <!-- Login Content Start -->
-                    <div class="m-account--content-w" data-bg-img="{% static 'assets/img/account/content-bg.jpg' %}">
+                    <div class="m-account--content-w" {# data-bg-img="{% static 'assets/img/account/content-bg.jpg' %}" #}>
                         <div class="m-account--content">
 
                             {% if form.errors %}
@@ -44,13 +44,14 @@
                         <div class="m-account--form">
                             <!-- Logo Start -->
                             <div class="logo">
-                                <img src="{% static 'assets/img/logo.png' %}" alt="">
+                                <img src="{% static 'images/casa-conceito-logo.png' %}" alt="">
                             </div>
                             <!-- Logo End -->
 
                             <form action="{% url 'login' %}" method="post">
                                 {% csrf_token %}
-                                <label class="m-account--title">Login to your account</label>
+{#                                <label class="m-account--title">Login to your account</label>#}
+                                <label class="m-account--title">Faça login na sua conta</label>
 
                                 <div class="form-group">
                                     <div class="input-group">
@@ -76,7 +77,7 @@
                                     <a href="{% url 'password_reset' %}" class="btn-link">Forgot Password?</a>
                                     <input type="hidden" name="next" value="{{ next }}" />
 
-                                    <button type="submit" value="login" class="btn btn-rounded btn-info" name="login">Login</button>
+                                    <button type="submit" value="login" class="btn btn-rounded btn-primary" name="login">Login</button>
                                 </div>
 
                                 <div class="m-account--footer">
