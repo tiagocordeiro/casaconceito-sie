@@ -19,14 +19,41 @@
         </div>
 
         <div class="panel-content">
-            <form action="." method="post" enctype="multipart/form-data">
+            {% if form.errors %}
+              {{ form.errors }}
+            {% endif %}
+            <div class="form-group">
+              <form action="." method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
-
-                {{ formset.management_form }}
-                {{ formset.as_p }}
-                <button type="submit">Update Profile</button>
-            </form>
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <span class="label-text">{{ form.first_name.label_tag }}</span>
+                    {{ form.first_name }}
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <span class="label-text">{{ form.last_name.label_tag }}</span>
+                    {{ form.last_name }}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <span class="label-text">{{ form.email.label_tag }}</span>
+                    {{ form.email }}
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    {{ formset.management_form }}
+                    {{ formset.as_p }}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                    <button class="btn btn-rounded btn-success" type="submit">Atualizar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
         </div>
     </div>
 </section>

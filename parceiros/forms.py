@@ -50,6 +50,12 @@ class ProfileForm(ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'email']
 
+        widgets = {
+            'first_name': TextInput(attrs={'class': 'form-control'}),
+            'last_name': TextInput(attrs={'class': 'form-control'}),
+            'email': EmailInput(attrs={'class': 'form-control'}),
+        }
+
 
 class SignUpForm(UserCreationForm):
     first_name = CharField(max_length=30, required=False, help_text='Optional.')
