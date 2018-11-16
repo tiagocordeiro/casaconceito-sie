@@ -30,6 +30,7 @@ admin.site.site_header = 'Casa Conceito'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('company/', include('company.urls')),
     path('', include('parceiros.urls')),
     # path('', home_view, name='home'),
     # path('', index, name='parceiros_home'),
