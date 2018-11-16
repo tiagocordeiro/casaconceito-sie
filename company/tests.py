@@ -1,10 +1,7 @@
 from django.contrib.auth.models import AnonymousUser, User, Group
 from django.test import RequestFactory, TestCase
-from django.utils import timezone
 
 from .views import company_details
-from .models import Company
-from .forms import CompanyForm
 
 
 class CompanyDertailsViewTestCorretor(TestCase):

@@ -23,12 +23,14 @@
                             <th>Indicação</th>
                             <th>Valor</th>
                             <th>Status</th>
+                            <th class="not-sortable"> </th>
                             <th>Corretor</th>
                             <th class="not-sortable"> </th>
                         {% else %}
                             <th>Indicação</th>
                             <th>Valor</th>
                             <th>Status</th>
+                            <th class="not-sortable"> </th>
                         {% endif %}
                     </tr>
                 </thead>
@@ -40,12 +42,16 @@
                             <td>{{ indicacao.valor }}</td>
                             {% if indicacao.status == "NOVO" %}
                                 <td><span class="label label-info">{{ indicacao.status }}</span></td>
+                                <td></td>
                             {% elif indicacao.status == "EM ANDAMENTO" %}
                                 <td><span class="label label-warning">{{ indicacao.status }}</span></td>
+                                <td></td>
                             {% elif indicacao.status == "FECHADO" %}
                                 <td><span class="label label-success">{{ indicacao.status }}</span></td>
+                                <td><button class="btn btn-success btn-sm" disabled="">Pago</button></td>
                             {% else %}
                                 <td><span class="label label-danger">{{ indicacao.status }}</span></td>
+                                <td></td>
                             {% endif %}
                             <td>{{ indicacao.added_by }}</td>
                             <td>
@@ -54,7 +60,7 @@
 
                                     <div class="dropdown-menu">
                                         <a href="{% url 'indicacao_edit' pk=indicacao.pk %}" class="dropdown-item">Editar</a>
-                                        <a href="#" class="dropdown-item">Detalhes</a>
+                                        <a href="{% url 'indicacao_edit' pk=indicacao.pk %}" class="dropdown-item">Detalhes</a>
                                     </div>
                                 </div>
                             </td>
@@ -63,12 +69,16 @@
                             <td>{{ indicacao.valor }}</td>
                             {% if indicacao.status == "NOVO" %}
                                 <td><span class="label label-info">{{ indicacao.status }}</span></td>
+                                <td></td>
                             {% elif indicacao.status == "EM ANDAMENTO" %}
                                 <td><span class="label label-warning">{{ indicacao.status }}</span></td>
-                            {% elif indicacao.status == "EM ANDAMENTO" %}
+                                <td></td>
+                            {% elif indicacao.status == "FECHADO" %}
                                 <td><span class="label label-success">{{ indicacao.status }}</span></td>
+                                <td><button class="btn btn-success btn-sm" disabled="">Pago</button></td>
                             {% else %}
                                 <td><span class="label label-danger">{{ indicacao.status }}</span></td>
+                                <td></td>
                             {% endif %}
                         {% endif %}
                     </tr>

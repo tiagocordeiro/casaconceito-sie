@@ -18,7 +18,7 @@ before_script:
 # command to run tests
 script:
   - pycodestyle casaconceito/ parceiros/ pages/ company/
-  - pyflakes casaconceito/ parceiros/ pages/
+  - pyflakes casaconceito/ parceiros/ pages/ company/
   - python manage.py test -v 2
 #  - flake8 casaconceito/ parceiros/ pages/
 #  - py.test --cov=pytocli tests/

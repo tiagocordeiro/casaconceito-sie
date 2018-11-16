@@ -33,7 +33,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="mailbox_inbox.html" class="nav-link">
+                <a href="#" class="nav-link">
                     <i class="fa fa-envelope"></i>
                     <span class="badge text-white bg-blue">4</span>
                 </a>
@@ -47,16 +47,23 @@
                     {% else %}
                         <img src="{{ usuario.avatar.url }}" alt="" class="rounded-circle">
                     {% endif %}
-                    <span>{{ user.get_username }}</span>
+                    {% if usuario.user.first_name and usuario.user.last_name %}
+                      <span>{{ usuario.user.first_name|safe }} {{ usuario.user.last_name|safe }}</span>
+                    {% elif usuario.user.first_name %}
+                      <span>{{ usuario.user.first_name|safe }}</span>
+                    {% else %}
+                      <span>{{ usuario.user.username|safe }}</span>
+                    {% endif %}
                     <i class="fa fa-angle-down"></i>
                 </a>
 
                 <ul class="dropdown-menu">
                     <li><a href="{% url "profile_update" %}"><i class="far fa-user"></i>Profile</a></li>
-                    <li><a href="mailbox_inbox.html"><i class="far fa-envelope"></i>Inbox</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
+                    <li><a href="#"><i class="far fa-envelope"></i>Inbox</a></li>
+                  {% if user.is_superuser %}
+                    <li><a href="{% url "company" %}"><i class="fa fa-cog"></i>Settings</a></li>
+                  {% endif %}
                     <li class="dropdown-divider"></li>
-                    <li><a href="lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
                     <li><a href="{% url 'logout' %}"><i class="fa fa-power-off"></i>Logout</a></li>
                 </ul>
             </li>
@@ -81,7 +88,13 @@
         </div>
 
         <div class="profile--name">
-            <a href="{% url "profile_update" %}" class="btn-link">{{ user.get_username }}</a>
+            {% if usuario.user.first_name and usuario.user.last_name %}
+              <a href="{% url "profile_update" %}" class="btn-link">{{ usuario.user.first_name|safe }} {{ usuario.user.last_name|safe }}</a>
+            {% elif usuario.user.first_name %}
+              <a href="{% url "profile_update" %}" class="btn-link">{{ usuario.user.first_name|safe }}</a>
+            {% else %}
+              <a href="{% url "profile_update" %}" class="btn-link">{{ usuario.user.username|safe }}</a>
+            {% endif %}
         </div>
 
         <div class="profile--nav">
@@ -92,12 +105,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="lock-screen.html" class="nav-link" title="Lock Screen">
-                        <i class="fa fa-lock"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="mailbox_inbox.html" class="nav-link" title="Messages">
+                    <a href="#" class="nav-link" title="Messages">
                         <i class="fa fa-envelope"></i>
                     </a>
                 </li>
