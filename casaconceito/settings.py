@@ -186,6 +186,6 @@ STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 # Sentry
 sentry_sdk.init(
-    dsn="https://0ae6f205e6ac4344994284e56147327f@sentry.io/1324170",
+    dsn=config('SENTRY_DSN'),
     integrations=[DjangoIntegration()]
 )
