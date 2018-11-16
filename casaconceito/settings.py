@@ -16,6 +16,9 @@ import django_heroku
 from dj_database_url import parse as dburl
 from decouple import config, Csv
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -180,3 +183,9 @@ CLOUDINARY_STORAGE = {
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+
+# Sentry
+sentry_sdk.init(
+    dsn="https://0ae6f205e6ac4344994284e56147327f@sentry.io/1324170",
+    integrations=[DjangoIntegration()]
+)
