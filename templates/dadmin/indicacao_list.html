@@ -1,5 +1,6 @@
 {% extends "dadmin/base.html" %}
 {% load static %}
+{% load parceiros_extras %}
 
 {% block title %}Dashboard - S.I.E.{% endblock %}
 {% block page-title %}Indicações{% endblock %}
@@ -16,10 +17,17 @@
     <div class="panel">
         <!-- Records List Start -->
         <div class="records--list" data-title="Listando Indicações">
+
+          {% if request.user|has_group:"Gerente" %}
+            <p>Teste</p>
+          {% else %}
+            <p>Else</p>
+          {% endif %}
+
             <table id="recordsListView">
                 <thead>
                     <tr>
-                        {% if user.is_superuser %}
+                        {% if user.is_superuser or request.user|has_group:"Gerente" %}
                             <th>Indicação</th>
                             <th>Valor</th>
                             <th>Status</th>
@@ -37,7 +45,7 @@
                 <tbody>
                     {% for indicacao in indicacoes %}
                     <tr>
-                        {% if user.is_superuser %}
+                        {% if user.is_superuser or request.user|has_group:"Gerente" %}
                             <td>{{ indicacao.cliente }}</td>
                             <td>{{ indicacao.valor }}</td>
                             {% if indicacao.status == "NOVO" %}

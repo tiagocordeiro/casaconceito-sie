@@ -177,7 +177,7 @@ def lista_indicacoes(request):
     else:
         indicacoes = Indicacao.objects.all().filter(added_by=request.user).order_by('-data_criacao')
 
-    return render(request, 'indicacoes/list.html', {'indicacoes': indicacoes})
+    return render(request, 'indicacoes/list.html', {'indicacoes': indicacoes, })
 
 
 @login_required
@@ -203,7 +203,7 @@ def dashboard_demo(request):
 
 @login_required
 def indicacao_list_dadmin(request):
-    if request.user.is_superuser:
+    if request.user.is_superuser or request.user.groups.filter(name__in=['Gerente']).exists():
         indicacoes = Indicacao.objects.all().order_by('-data_criacao')
     else:
         indicacoes = Indicacao.objects.all().filter(added_by=request.user).order_by('-data_criacao')

@@ -1,5 +1,6 @@
 {% extends "dadmin/base.html" %}
 {% load static %}
+{% load parceiros_extras %}
 
 {% block title %}Dashboard - S.I.E.{% endblock %}
 {% block page-title %}Nova Indicação{% endblock %}
@@ -64,7 +65,7 @@
 
                         <hr>
 
-                        {% if request.user.is_superuser %}
+                        {% if request.user.is_superuser or request.user|has_group:"Gerente" %}
                         <div class="form-row">
                             <div class="col-md-6 col-sm-12">
                                 <span class="label-text">{{ form.status.label_tag }}</span>

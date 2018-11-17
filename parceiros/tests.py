@@ -7,7 +7,7 @@ from .models import Indicacao
 from .forms import IndicacaoForm
 
 
-class ParceirosViewsTest(TestCase):
+class ParceirosViewsCorretorTest(TestCase):
     def setUp(self):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
@@ -23,6 +23,7 @@ class ParceirosViewsTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_lista_indicacoes_logado(self):
+        self.group = Group.objects.create(name='Gerente')
         request = self.factory.get('/indicacoes')
         request.user = self.user
 
