@@ -7,6 +7,22 @@ from .models import Indicacao
 from .forms import IndicacaoForm
 
 
+class ParceirosViewsGerenteTest(TestCase):
+    def setUp(self):
+        # Every test needs access to the request factory.
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(username='jacob', email='jacob@…', password='top_secret')
+        self.group = Group.objects.create(name='Gerente')
+        self.group.user_set.add(self.user)
+
+    def test_lista_indicacoes_gerente_logado(self):
+        request = self.factory.get('/indicacoes')
+        request.user = self.user
+
+        response = indicacao_list_dadmin(request)
+        self.assertEqual(response.status_code, 200)
+
+
 class ParceirosViewsCorretorTest(TestCase):
     def setUp(self):
         # Every test needs access to the request factory.
@@ -22,14 +38,6 @@ class ParceirosViewsCorretorTest(TestCase):
         response = indicacao_list_dadmin(request)
         self.assertEqual(response.status_code, 302)
 
-    def test_lista_indicacoes_logado(self):
-        self.group = Group.objects.create(name='Gerente')
-        request = self.factory.get('/indicacoes')
-        request.user = self.user
-
-        response = indicacao_list_dadmin(request)
-        self.assertEqual(response.status_code, 200)
-
     def test_dashboard_parceiro_anonimo(self):
         request = self.factory.get('/')
         request.user = AnonymousUser()
@@ -37,7 +45,7 @@ class ParceirosViewsCorretorTest(TestCase):
         response = dashboard(request)
         self.assertEqual(response.status_code, 302)
 
-    def test_dashboard_parceiro_logado(self):
+    def test_dashboard_parceiro_corretor_logado(self):
         request = self.factory.get('/')
         request.user = self.user
 
