@@ -24,14 +24,14 @@
                             <th>Indicação</th>
                             <th>Valor</th>
                             <th>Status</th>
-                            <th class="not-sortable"> </th>
+                            <th>Pagamento</th>
                             <th>Corretor</th>
                             <th class="not-sortable"> </th>
                         {% else %}
                             <th>Indicação</th>
                             <th>Valor</th>
                             <th>Status</th>
-                            <th class="not-sortable"> </th>
+                            <th>Pagamento</th>
                         {% endif %}
                     </tr>
                 </thead>
@@ -49,7 +49,13 @@
                                 <td></td>
                             {% elif indicacao.status == "FECHADO" %}
                                 <td><span class="label label-success">{{ indicacao.status }}</span></td>
-                                <td><button class="btn btn-success btn-sm" disabled="">Pago</button></td>
+                                {% if indicacao.indicacaopagamentos.status_pagamento ==  "SOLICITADO" %}
+                                  <td><button class="btn btn-info btn-sm" disabled="">SOLICITADO</button></td>
+                                {% elif indicacao.indicacaopagamentos.status_pagamento ==  "PAGO" %}
+                                  <td><button class="btn btn-success btn-sm" disabled="">PAGO</button></td>
+                                {% else %}
+                                  <td><button class="btn btn-success btn-sm" disabled="">Liberado</button></td>
+                                {% endif %}
                             {% else %}
                                 <td><span class="label label-danger">{{ indicacao.status }}</span></td>
                                 <td></td>
@@ -76,7 +82,13 @@
                                 <td></td>
                             {% elif indicacao.status == "FECHADO" %}
                                 <td><span class="label label-success">{{ indicacao.status }}</span></td>
-                                <td><button class="btn btn-success btn-sm" disabled="">Pago</button></td>
+                                {% if indicacao.indicacaopagamentos.status_pagamento ==  "SOLICITADO" %}
+                                  <td><button class="btn btn-info btn-sm" disabled="">SOLICITADO</button></td>
+                                {% elif indicacao.indicacaopagamentos.status_pagamento ==  "PAGO" %}
+                                  <td><button class="btn btn-success btn-sm" disabled="">PAGO</button></td>
+                                {% else %}
+                                  <td><a href="{% url 'indicacao_solicita_pg' indicacao.pk %}" class="btn btn-success btn-sm">Solicitar Pagamento</a></td>
+                                {% endif %}
                             {% else %}
                                 <td><span class="label label-danger">{{ indicacao.status }}</span></td>
                                 <td></td>

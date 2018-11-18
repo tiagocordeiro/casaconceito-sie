@@ -1,0 +1,58 @@
+{% extends "dadmin/base.html" %}
+{% load static %}
+{% load parceiros_extras %}
+
+{% block title %}Dashboard - S.I.E.{% endblock %}
+{% block page-title %}Nova Indicação{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'indicacao_list' %}">Indicações</a></li>
+  <li class="breadcrumb-item active"><span>Detalhes</span></li>
+{% endblock %}
+
+{% block content %}
+  <!-- Main Content Start -->
+  <section class="main--content">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ indicacao.cliente }}</h3>
+
+        <div class="dropdown">
+          <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-ellipsis-v"></i>
+          </button>
+
+          <ul class="dropdown-menu">
+            <li><a href="#"><i class="far fa-circle"></i>Panel Option 1</a></li>
+            <li><a href="#"><i class="far fa-circle"></i>Panel Option 2</a></li>
+            <li><a href="#"><i class="far fa-circle"></i>Panel Option 3</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel-content">
+        <p>{{ indicacao.status }}</p>
+      </div>
+    </div>
+  </section>
+  <!-- Main Content End -->
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="{% static "assets/js/jquery.mask.min.js" %}"></script>
+  <script>
+    $(document).ready(function () {
+      var SPMaskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+          },
+          spOptions = {
+            onKeyPress: function (val, e, field, options) {
+              field.mask(SPMaskBehavior.apply({}, arguments), options);
+            }
+          };
+
+      $('.phone').mask(SPMaskBehavior, spOptions);
+    });
+  </script>
+{% endblock %}
