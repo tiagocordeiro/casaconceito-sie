@@ -33,6 +33,7 @@ class Indicacao(models.Model):
 
     class Meta:
         verbose_name_plural = "indicações"
+        verbose_name = "Indicação"
 
     def publish(self):
         self.data_criacao = timezone.now()
@@ -40,3 +41,29 @@ class Indicacao(models.Model):
 
     def __str__(self):
         return self.cliente
+
+
+class IndicacaoPagamentos(models.Model):
+    PAGAMENTO_STATUS_CHOICES = (
+        ('SOLICITADO', 'Solicitado'),
+        ('PAGO', 'Pago'),
+    )
+    indicacao = models.OneToOneField(Indicacao, on_delete=models.CASCADE)
+    status_pagamento = models.CharField(max_length=20, choices=PAGAMENTO_STATUS_CHOICES, default='SOLICITADO')
+    valor_pagamento = models.DecimalField(max_digits=11, decimal_places=2, default=0)
+    data_criacao = models.DateTimeField(default=timezone.now)
+    added_by = models.ForeignKey(User,
+                                 blank=True, null=True,
+                                 on_delete=models.SET_NULL)
+    last_modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "pagamentos"
+        verbose_name = "pagamento"
+
+    def publish(self):
+        self.data_criacao = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.indicacao.cliente

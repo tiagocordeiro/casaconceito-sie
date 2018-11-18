@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from .models import Indicacao, UserProfile
+from .models import Indicacao, UserProfile, IndicacaoPagamentos
 
 
 class UserProfileInline(admin.StackedInline):
@@ -24,6 +24,7 @@ class IndicacaoAdmin(admin.ModelAdmin):
     list_display = ('cliente', 'valor', 'data_criacao', 'added_by', 'status')
     # list_filter = ('cliente', 'data_criacao', 'added_by',)
     search_fields = ('cliente', 'added_by',)
+
     # fieldsets = [(None, {'fields': [('cliente', 'descricao', 'valor')]})]
 
     def get_list_display(self, request):
@@ -63,6 +64,12 @@ class IndicacaoAdmin(admin.ModelAdmin):
         obj.save()
 
 
+class IndicacaoPagamentosAdmin(admin.ModelAdmin):
+    list_display = ('indicacao', 'status_pagamento', 'valor_pagamento')
+    list_filter = ('status_pagamento',)
+
+
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Indicacao, IndicacaoAdmin)
+admin.site.register(IndicacaoPagamentos, IndicacaoPagamentosAdmin)

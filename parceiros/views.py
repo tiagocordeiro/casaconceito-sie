@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import IndicacaoForm, IndicacaoEditForm, UserProfileForm, ProfileForm, SignUpForm
-from .models import Indicacao, UserProfile
+from .models import Indicacao, UserProfile, IndicacaoPagamentos
 
 
 @login_required
@@ -215,6 +215,26 @@ def indicacao_list_dadmin(request):
 
     return render(request, 'dadmin/indicacao_list.html', {'indicacoes': indicacoes,
                                                           'usuario': usuario, })
+
+
+@login_required
+def indicacao_solicita_pagamento(request, pk):
+    try:
+        usuario = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        usuario = None
+
+    indicacao = Indicacao.objects.get(pk=pk)
+    solicitacao = IndicacaoPagamentos(indicacao=indicacao)
+
+    if indicacao.status == 'FECHADO' and solicitacao.status_pagamento is None:
+        solicitacao.save()
+    else:
+        pass
+
+    return render(request, 'dadmin/indicacao_detalhes.html', {'indicacao': indicacao,
+                                                              'solicitacao': solicitacao,
+                                                              'usuario': usuario, })
 
 
 @login_required
