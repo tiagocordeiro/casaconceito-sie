@@ -225,12 +225,13 @@ def indicacao_solicita_pagamento(request, pk):
         usuario = None
 
     indicacao = Indicacao.objects.get(pk=pk)
-    solicitacao = IndicacaoPagamentos(indicacao=indicacao)
 
-    if indicacao.status == 'FECHADO' and solicitacao.status_pagamento is None:
-        solicitacao.save()
+    if IndicacaoPagamentos.objects.filter(indicacao=indicacao).exists():
+        solicitacao = IndicacaoPagamentos.objects.get(indicacao=indicacao)
     else:
-        pass
+        if indicacao.status == 'FECHADO':
+            solicitacao = IndicacaoPagamentos(indicacao=indicacao, added_by=request.user)
+            solicitacao.save()
 
     return render(request, 'dadmin/indicacao_detalhes.html', {'indicacao': indicacao,
                                                               'solicitacao': solicitacao,
