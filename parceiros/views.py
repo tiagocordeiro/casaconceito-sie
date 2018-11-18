@@ -229,9 +229,11 @@ def indicacao_solicita_pagamento(request, pk):
     if IndicacaoPagamentos.objects.filter(indicacao=indicacao).exists():
         solicitacao = IndicacaoPagamentos.objects.get(indicacao=indicacao)
     else:
-        if indicacao.status == 'FECHADO':
+        if indicacao.status == 'FECHADO' and indicacao.added_by == request.user:
             solicitacao = IndicacaoPagamentos(indicacao=indicacao, added_by=request.user)
             solicitacao.save()
+        else:
+            return redirect('indicacao_list')
 
     return render(request, 'dadmin/indicacao_detalhes.html', {'indicacao': indicacao,
                                                               'solicitacao': solicitacao,
