@@ -217,6 +217,7 @@ def indicacao_list_dadmin(request):
                                                           'usuario': usuario, })
 
 
+# TODO criar nova view e url para detalhes da indicação.
 @login_required
 def indicacao_solicita_pagamento(request, pk):
     try:

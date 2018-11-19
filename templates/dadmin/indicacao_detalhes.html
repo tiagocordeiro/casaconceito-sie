@@ -32,27 +32,157 @@
       </div>
 
       <div class="panel-content">
-        <p>{{ indicacao.status }}</p>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col">
+                <h5 class="h5 fw--600 mb-3">Status</h5>
+              </div>
+              <div class="col" align="center">
+                <button class="btn btn-success btn-sm mb-3" disabled="">{{ indicacao.status }}</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col">
+                <h5 class="h5 fw--600 mb-3">Pagamento</h5>
+              </div>
+              <div class="col" align="center">
+                <button class="btn btn-success btn-sm mb-3" disabled="">{{ solicitacao.status_pagamento }}</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col">
+                <h5 class="h5 fw--600 mb-3">Progresso</h5>
+              </div>
+              <div class="col">
+                {% if solicitacao.status_pagamento == 'PAGO' %}
+                  <div class="progress h-15px mt-2">
+                    <div class="progress-bar progress-bar-striped bg-success w-100">100%</div>
+                  </div>
+                {% else %}
+                  <div class="progress h-15px mt-2">
+                    <div class="progress-bar progress-bar-striped bg-info w-75">75%</div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">Timeline</h3>
+      </div>
+
+      <div class="panel-content">
+        <!-- Vertical Timeline Start -->
+        <div class="vertical-timeline">
+          <ul class="list-unstyled">
+            <li class="title">Hoje</li>
+
+            {% if solicitacao.status_pagamento == 'PAGO' %}
+            <li>
+              <span class="time">{{ solicitacao.last_modified|date:'d/m/Y' }}</span>
+              <span class="dot bg-secondary"></span>
+              <div class="content">
+                <h3 class="subtitle">Pagamento liberado</h3>
+
+                <div class="feeds-panel">
+                  <ul class="nav">
+                    <li>
+                      <i class="fa fa-money-bill-alt text-white bg-green"></i>
+                      <span class="text">R$ {{ solicitacao.valor_pagamento }}</span>
+                    </li>
+                    <li>
+                      <i class="fa fa-calendar text-white bg-blue"></i>
+                      <span class="text">{{ solicitacao.last_modified }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            {% endif %}
+
+            <li>
+              <span class="time">{{ solicitacao.data_criacao|date:'d/m/Y' }}</span>
+              <span class="dot bg-secondary"></span>
+              <div class="content">
+                <h3 class="subtitle">Pagamento solicitado</h3>
+
+                <div class="feeds-panel">
+                  <ul class="nav">
+                    <li>
+                      <i class="fa fa-user text-white bg-green"></i>
+                      <span class="text">{{ indicacao.added_by }}</span>
+                    </li>
+                    <li>
+                      <i class="fa fa-calendar text-white bg-blue"></i>
+                      <span class="text">{{ solicitacao.data_criacao }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li>
+              <span class="time">{{ indicacao.last_modified|date:'d/m/Y' }}</span>
+              <span class="dot bg-warning"></span>
+              <div class="content">
+                <h3 class="subtitle">Ultima modificação</h3>
+
+                <div class="feeds-panel">
+                  <ul class="nav">
+                    <li>
+                      <i class="fa fa-thumbs-up text-white bg-green"></i>
+                      <span class="text">Indicação Fechada</span>
+                    </li>
+                    <li>
+                      <i class="fa fa-calendar text-white bg-blue"></i>
+                      <span class="text">{{ indicacao.last_modified }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class="title">{{ indicacao.data_criacao|date:'M' }}</li>
+            <li>
+              <span class="time">{{ indicacao.data_criacao|date:'d/m/Y' }}</span>
+              <span class="dot bg-info"></span>
+              <div class="content">
+                <h3 class="subtitle">Indicação adicionada</h3>
+                <div class="feeds-panel">
+                  <ul class="nav">
+                    <li>
+                      {#                      <span class="time">25 mins</span>#}
+                      <i class="fa fa-user text-white bg-green"></i>
+                      <span class="text">{{ indicacao.added_by }}</span>
+                    </li>
+                    <li>
+{#                      <span class="time">4 hours</span>#}
+                      <i class="fa fa-address-card text-white bg-blue"></i>
+                      <span class="text">{{ indicacao.cliente }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class="action">
+              <a href="#" class="btn btn-info">Nova Indicação</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Vertical Timeline End -->
+      </div>
+    </div>
+
+
   </section>
   <!-- Main Content End -->
-{% endblock %}
-
-{% block extra_scripts %}
-  <script src="{% static "assets/js/jquery.mask.min.js" %}"></script>
-  <script>
-    $(document).ready(function () {
-      var SPMaskBehavior = function (val) {
-            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-          },
-          spOptions = {
-            onKeyPress: function (val, e, field, options) {
-              field.mask(SPMaskBehavior.apply({}, arguments), options);
-            }
-          };
-
-      $('.phone').mask(SPMaskBehavior, spOptions);
-    });
-  </script>
 {% endblock %}
