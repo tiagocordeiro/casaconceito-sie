@@ -5,73 +5,85 @@
 {% block page-title %}Detalhes da Empresa{% endblock %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-    <li class="breadcrumb-item active"><span>{{ company|safe }}</span></li>
+  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+  <li class="breadcrumb-item active"><span>{{ company|safe }}</span></li>
 {% endblock %}
 
 {% block content %}
 
-<!-- Main Content Start -->
-<section class="main--content">
+  <!-- Main Content Start -->
+  <section class="main--content">
     <div class="panel">
-        <div class="panel-heading">
-            <h3 class="panel-title">Detalhes da Empresa</h3>
-        </div>
+      <div class="panel-heading">
+        <h3 class="panel-title">Detalhes da Empresa</h3>
+      </div>
 
-        <div class="panel-content">
-            {% if form.errors %}
-                {{ form.errors }}
-            {% endif %}
-            <div class="form-group">
-              <form action="." method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-                <div class="form-row">
-                  <div class="col-md-6 col-sm-12">
-                    <span class="label-text">{{ form.name.label_tag }}</span>
-                    {{ form.name }}
-                  </div>
-                  <div class="col-md-6 col-sm-12">
-                    <span class="label-text">{{ form.website.label_tag }}</span>
-                    {{ form.website }}
-                  </div>
-                </div>
-
-                <hr>
-
-                <div class="form-row">
-                  <div class="col-md-12 col-sm-12">
-                    <span class="label-text">{{ form.address.label_tag }}</span>
-                    {{ form.address }}
-                  </div>
-                </div>
-
-                <hr>
-
-                <div class="form-row">
-                  <div class="col-md-6 col-sm-12">
-                    <span class="label-text">{{ form.phone.label_tag }}</span>
-                    {{ form.phone }}
-                  </div>
-                  <div class="col-md-6 col-sm-12">
-                    <span class="label-text">{{ form.email.label_tag }}</span>
-                    {{ form.email }}
-                  </div>
-                </div>
-
-                <hr>
-
-                <div class="form-row">
-                  <div style="padding: 30px 0px;" class="col-md-6 col-sm-12">
-                    <span class="label-text">{{ form.logo.label_tag }}</span>
-                    {{ form.logo }}
-                  </div>
-                  <div style="padding: 30px 0px;" class="col-md-6 col-sm-12">
-                    <button class="form-control btn-success" type="submit">Atualizar</button>
-                  </div>
-                </div>
-              </form>
+      <div class="panel-content">
+        {% if form.errors %}
+          {{ form.errors }}
+        {% endif %}
+        <div class="form-group">
+          <form action="." method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+              <div class="col-md-6 col-sm-12">
+                <span class="label-text">{{ form.name.label_tag }}</span>
+                {{ form.name }}
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <span class="label-text">{{ form.website.label_tag }}</span>
+                {{ form.website }}
+              </div>
             </div>
+
+            <hr>
+
+            <div class="form-row">
+              <div class="col-md-12 col-sm-12">
+                <span class="label-text">{{ form.address.label_tag }}</span>
+                {{ form.address }}
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="form-row">
+              <div class="col-md-6 col-sm-12">
+                <span class="label-text">{{ form.phone.label_tag }}</span>
+                {{ form.phone }}
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <span class="label-text">{{ form.email.label_tag }}</span>
+                {{ form.email }}
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="form-row">
+              <div style="padding: 30px 0px;" class="col-md-6 col-sm-12">
+                <span class="label-text">{{ form.logo.label_tag }}</span>
+                {{ form.logo }}
+              </div>
+              <div style="padding: 30px 0px;" class="col-md-6 col-sm-12">
+                <button class="form-control btn-success" type="submit">Atualizar</button>
+              </div>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
-</section>
+  </section>
+  <script>
+    // window.onload
+    window.onload = function () {
+      addButtomClass();
+    };
+
+
+    function addButtomClass() {
+      var buttom = document.getElementById("id_logo");
+      buttom.classList.add("form-control");
+    }
+  </script>
 {% endblock %}

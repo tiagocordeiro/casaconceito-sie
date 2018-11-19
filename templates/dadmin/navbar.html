@@ -47,13 +47,12 @@
                     {% else %}
                         <img src="{{ usuario.avatar.url }}" alt="" class="rounded-circle">
                     {% endif %}
-                    {% if usuario.user.first_name and usuario.user.last_name %}
-                      <span>{{ usuario.user.first_name|safe }} {{ usuario.user.last_name|safe }}</span>
-                    {% elif usuario.user.first_name %}
-                      <span>{{ usuario.user.first_name|safe }}</span>
+                    {% if user.first_name %}
+                      <span>{{ user.first_name|safe }}</span>
                     {% else %}
-                      <span>{{ usuario.user.username|safe }}</span>
+                      <span>{{ user.username }}</span>
                     {% endif %}
+
                     <i class="fa fa-angle-down"></i>
                 </a>
 
@@ -88,12 +87,10 @@
         </div>
 
         <div class="profile--name">
-            {% if usuario.user.first_name and usuario.user.last_name %}
-              <a href="{% url "profile_update" %}" class="btn-link">{{ usuario.user.first_name|safe }} {{ usuario.user.last_name|safe }}</a>
-            {% elif usuario.user.first_name %}
-              <a href="{% url "profile_update" %}" class="btn-link">{{ usuario.user.first_name|safe }}</a>
+            {% if user.first_name %}
+              <a href="{% url "profile_update" %}" class="btn-link">{{ user.first_name|safe }}</a>
             {% else %}
-              <a href="{% url "profile_update" %}" class="btn-link">{{ usuario.user.username|safe }}</a>
+              <a href="{% url "profile_update" %}" class="btn-link">{{ user.username|safe }}</a>
             {% endif %}
         </div>
 

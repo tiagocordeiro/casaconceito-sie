@@ -34,6 +34,8 @@ def dashboard(request):
         usuario = UserProfile.objects.get(user=request.user)
     except UserProfile.DoesNotExist:
         usuario = None
+
+    user = User.objects.get(username=request.user)
     indicacoes = Indicacao.objects.all().filter(added_by=request.user).order_by('-data_criacao')
     indicacoes_qt = Indicacao.objects.all().filter(added_by=request.user).count()
     indicacoes_ganhas = Indicacao.objects.all() \
@@ -46,7 +48,8 @@ def dashboard(request):
                                                      'indicacoes_ganhas': indicacoes_ganhas,
                                                      'total_ganho': total_ganho['valor__sum'],
                                                      'indicacoes': indicacoes,
-                                                     'usuario': usuario, })
+                                                     'usuario': usuario,
+                                                     'user': user, })
 
 
 @login_required
@@ -75,6 +78,8 @@ def profile_update(request):
     except UserProfile.DoesNotExist:
         usuario = None
 
+    user = User.objects.get(username=request.user)
+
     ProfileInlineFormset = inlineformset_factory(User, UserProfile, fields=('avatar',))
     formset = ProfileInlineFormset(instance=request.user)
 
@@ -99,6 +104,7 @@ def profile_update(request):
     return render(request, 'dadmin/profile_update.html', {'form': form,
                                                           'formset': formset,
                                                           'usuario': usuario,
+                                                          'user': user,
                                                           'indicacoes_qt': indicacoes_qt,
                                                           'indicacoes_ganhas': indicacoes_ganhas,
                                                           'total_ganho': total_ganho['valor__sum'],
