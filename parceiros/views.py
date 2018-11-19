@@ -217,6 +217,30 @@ def indicacao_list_dadmin(request):
                                                           'usuario': usuario, })
 
 
+@login_required
+def indicacao_detail(request, pk):
+    try:
+        usuario = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        usuario = None
+
+    indicacao = Indicacao.objects.get(pk=pk)
+
+    if request.user.is_superuser or request.user.groups.filter(
+            name__in=['Gerente']).exists() or indicacao.added_by == request.user:
+
+        if IndicacaoPagamentos.objects.filter(indicacao=indicacao).exists():
+            solicitacao = IndicacaoPagamentos.objects.get(indicacao=indicacao)
+        else:
+            solicitacao = ""
+    else:
+        return redirect('indicacao_list')
+
+    return render(request, 'dadmin/indicacao_detalhes.html', {'indicacao': indicacao,
+                                                              'solicitacao': solicitacao,
+                                                              'usuario': usuario, })
+
+
 # TODO criar nova view e url para detalhes da indicação.
 @login_required
 def indicacao_solicita_pagamento(request, pk):

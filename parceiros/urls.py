@@ -10,6 +10,7 @@ urlpatterns = [
     path('indicacao/list/', views.indicacao_list_dadmin, name='indicacao_list'),
     path('indicacao/new/', views.indicacao_add_dadmin, name='indicacao_add'),
     path('indicacao/edit/<pk>/', views.indicacao_edit_dadmin, name='indicacao_edit'),
+    path('indicacao/detail/<pk>/', views.indicacao_detail, name='indicacao_detail'),
     path('indicacao/solicitapg/<pk>/', views.indicacao_solicita_pagamento, name='indicacao_solicita_pg'),
     path('profile/', views.profile, name='profile'),
     path('profile/update/', views.profile_update, name='profile_update'),

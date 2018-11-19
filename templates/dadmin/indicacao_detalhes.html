@@ -50,7 +50,11 @@
                 <h5 class="h5 fw--600 mb-3">Pagamento</h5>
               </div>
               <div class="col" align="center">
+                {% if solicitacao.status_pagamento %}
                 <button class="btn btn-success btn-sm mb-3" disabled="">{{ solicitacao.status_pagamento }}</button>
+                {% else %}
+                <button class="btn btn-info btn-sm mb-3" disabled="">Aberto</button>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -111,6 +115,7 @@
             </li>
             {% endif %}
 
+            {% if solicitacao.status_pagamento == 'SOLICITADO' %}
             <li>
               <span class="time">{{ solicitacao.data_criacao|date:'d/m/Y' }}</span>
               <span class="dot bg-secondary"></span>
@@ -131,6 +136,8 @@
                 </div>
               </div>
             </li>
+            {% endif %}
+
             <li>
               <span class="time">{{ indicacao.last_modified|date:'d/m/Y' }}</span>
               <span class="dot bg-warning"></span>
@@ -140,8 +147,8 @@
                 <div class="feeds-panel">
                   <ul class="nav">
                     <li>
-                      <i class="fa fa-thumbs-up text-white bg-green"></i>
-                      <span class="text">Indicação Fechada</span>
+                      <i class="fa fa-calendar-check text-white bg-green"></i>
+                      <span class="text">{{ indicacao.status }}</span>
                     </li>
                     <li>
                       <i class="fa fa-calendar text-white bg-blue"></i>
