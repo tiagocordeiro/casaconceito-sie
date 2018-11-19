@@ -28,7 +28,12 @@ python manage.py migrate
 
 ### Populando o banco de dados
 
-Cria Categorias
+Cria categorias ['Corretor', 'Gerente']
 ```
 python manage.py loaddata parceiros/fixtures/parceiros_categories.json
+```
+
+Cria usuário
+```
+python manage.py createsuperuser --username dev --email dev@foo.bar
 ```
