@@ -76,7 +76,7 @@
                 <span class="label-text">{{ form.email.label_tag }}</span>
                 {{ form.email }}
               </div>
-              <div class="col-md-6 col-sm-12">
+              <div id="avatar-col" class="col-md-6 col-sm-12">
                 {{ formset.management_form }}
                 {{ formset.as_p }}
               </div>
@@ -92,16 +92,22 @@
       </div>
     </div>
   </section>
+
   <script>
     // window.onload
     window.onload = function () {
-      addButtomClass();
+      cumstomAvatarFilePick();
     };
 
-
-    function addButtomClass() {
-      var buttom = document.getElementById("id_userprofile-0-avatar");
-      buttom.classList.add("form-control");
+    function cumstomAvatarFilePick() {
+      var avatar = document.querySelector("#avatar-col > p:nth-child(9)").innerHTML;
+      var res = avatar.replace(avatar, '<label for="id_userprofile-0-avatar">Imagem:</label><label for="id_userprofile-0-avatar" class="custom-file">\n' +
+          '      <input type="file" name="userprofile-0-avatar" accept="image/*" id="id_userprofile-0-avatar"\n' +
+          '             class="custom-file-input">\n' +
+          '      <span class="custom-file-label">Choose File</span>\n' +
+          '    </label>');
+      document.querySelector("#avatar-col > p:nth-child(9)").innerHTML = res;
     }
   </script>
+
 {% endblock %}
