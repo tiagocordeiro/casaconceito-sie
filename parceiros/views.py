@@ -41,12 +41,12 @@ def dashboard(request):
     indicacoes_ganhas = Indicacao.objects.all() \
         .filter(added_by=request.user) \
         .filter(status='FECHADO').count()
-    total_ganho = Indicacao.objects.all() \
+    total_ganho = IndicacaoPagamentos.objects.all() \
         .filter(added_by=request.user) \
-        .filter(status='FECHADO').aggregate(Sum('valor'))
+        .filter(status_pagamento='PAGO').aggregate(Sum('valor_pagamento'))
     return render(request, 'dadmin/dashboard.html', {'indicacoes_qt': indicacoes_qt,
                                                      'indicacoes_ganhas': indicacoes_ganhas,
-                                                     'total_ganho': total_ganho['valor__sum'],
+                                                     'total_ganho': total_ganho['valor_pagamento__sum'],
                                                      'indicacoes': indicacoes,
                                                      'usuario': usuario,
                                                      'user': user, })
@@ -69,9 +69,9 @@ def profile_update(request):
     indicacoes_ganhas = Indicacao.objects.all() \
         .filter(added_by=request.user) \
         .filter(status='FECHADO').count()
-    total_ganho = Indicacao.objects.all() \
+    total_ganho = IndicacaoPagamentos.objects.all() \
         .filter(added_by=request.user) \
-        .filter(status='FECHADO').aggregate(Sum('valor'))
+        .filter(status_pagamento='PAGO').aggregate(Sum('valor_pagamento'))
 
     try:
         usuario = UserProfile.objects.get(user=request.user)
@@ -107,7 +107,7 @@ def profile_update(request):
                                                           'user': user,
                                                           'indicacoes_qt': indicacoes_qt,
                                                           'indicacoes_ganhas': indicacoes_ganhas,
-                                                          'total_ganho': total_ganho['valor__sum'],
+                                                          'total_ganho': total_ganho['valor_pagamento__sum'],
                                                           'indicacoes': indicacoes, })
 
 
@@ -334,7 +334,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('dashboard')
+            return redirect('indicacao_add')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
