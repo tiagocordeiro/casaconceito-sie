@@ -5,7 +5,7 @@
     <div class="navbar--header">
         <!-- Logo Start -->
         <a href="{% url 'dashboard' %}" class="logo">
-            <img src="{% static "images/casa-conceito-h-logo.png" %}" alt="">
+            <img src="{% static "images/casa-conceito-h-logo.png" %}" alt="Casa Conceito">
         </a>
         <!-- Logo End -->
 
@@ -25,19 +25,19 @@
 
     <div class="navbar--nav ml-auto">
         <ul class="nav">
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fa fa-bell"></i>
-                    <span class="badge text-white bg-blue">7</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fa fa-envelope"></i>
-                    <span class="badge text-white bg-blue">4</span>
-                </a>
-            </li>
+{#            <li class="nav-item">#}
+{#                <a href="#" class="nav-link">#}
+{#                    <i class="fa fa-bell"></i>#}
+{#                    <span class="badge text-white bg-blue">7</span>#}
+{#                </a>#}
+{#            </li>#}
+{##}
+{#            <li class="nav-item">#}
+{#                <a href="#" class="nav-link">#}
+{#                    <i class="fa fa-envelope"></i>#}
+{#                    <span class="badge text-white bg-blue">4</span>#}
+{#                </a>#}
+{#            </li>#}
 
             <!-- Nav User Start -->
             <li class="nav-item dropdown nav--user online">
@@ -57,13 +57,13 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="{% url "profile_update" %}"><i class="far fa-user"></i>Profile</a></li>
-                    <li><a href="#"><i class="far fa-envelope"></i>Inbox</a></li>
+                    <li><a href="{% url "profile_update" %}"><i class="far fa-user"></i>Perfil</a></li>
+{#                    <li><a href="#"><i class="far fa-envelope"></i>Inbox</a></li>#}
                   {% if user.is_superuser %}
-                    <li><a href="{% url "company" %}"><i class="fa fa-cog"></i>Settings</a></li>
+                    <li><a href="{% url "company" %}"><i class="fa fa-cog"></i>Configurações</a></li>
                   {% endif %}
                     <li class="dropdown-divider"></li>
-                    <li><a href="{% url 'logout' %}"><i class="fa fa-power-off"></i>Logout</a></li>
+                    <li><a href="{% url 'logout' %}"><i class="fa fa-power-off"></i>Sair</a></li>
                 </ul>
             </li>
             <!-- Nav User End -->
@@ -97,17 +97,17 @@
         <div class="profile--nav">
             <ul class="nav">
                 <li class="nav-item">
-                    <a href="{% url "profile_update" %}" class="nav-link" title="User Profile">
+                    <a href="{% url "profile_update" %}" class="nav-link" title="Perfil do usuário">
                         <i class="fa fa-user"></i>
                     </a>
                 </li>
+{#                <li class="nav-item">#}
+{#                    <a href="#" class="nav-link" title="Messages">#}
+{#                        <i class="fa fa-envelope"></i>#}
+{#                    </a>#}
+{#                </li>#}
                 <li class="nav-item">
-                    <a href="#" class="nav-link" title="Messages">
-                        <i class="fa fa-envelope"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'logout' %}" class="nav-link" title="Logout">
+                    <a href="{% url 'logout' %}" class="nav-link" title="Sair">
                         <i class="fa fa-sign-out-alt"></i>
                     </a>
                 </li>
@@ -146,12 +146,12 @@
                             <span>Consultar</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fab fa-wpforms"></i>
-                            <span>Relatórios</span>
-                        </a>
-                    </li>
+{#                    <li>#}
+{#                        <a href="#">#}
+{#                            <i class="fab fa-wpforms"></i>#}
+{#                            <span>Relatórios</span>#}
+{#                        </a>#}
+{#                    </li>#}
                 </ul>
             </li>
         </ul>
