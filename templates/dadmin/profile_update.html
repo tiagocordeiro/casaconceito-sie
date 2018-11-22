@@ -19,7 +19,7 @@
         {% if usuario.avatar.url is None %}
           <img src="{% static 'assets/img/avatars/01_150x150.png' %}" alt="" class="rounded-circle">
         {% else %}
-          <img src="{{ usuario.avatar.url }}" alt="" class="rounded-circle">
+          <img src="{{ usuario.avatar.url }}" alt="" class="rounded-circle" style="object-fit: cover; height: 120px;">
         {% endif %}
         {% if user.first_name %}
           <h3 class="h3">{{ user.first_name|safe }}</h3>

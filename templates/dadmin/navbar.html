@@ -45,7 +45,7 @@
                     {% if usuario is None %}
                         <img src="{% static 'assets/img/avatars/01_150x150.png' %}" alt="" class="rounded-circle">
                     {% else %}
-                        <img src="{{ usuario.avatar.url }}" alt="" class="rounded-circle">
+                        <img src="{{ usuario.avatar.url }}" alt="" class="rounded-circle" style="object-fit: cover; height: 50px;">
                     {% endif %}
                     {% if user.first_name %}
                       <span>{{ user.first_name|safe }}</span>
@@ -81,7 +81,7 @@
                 {% if usuario is None %}
                     <img src="{% static 'assets/img/avatars/01_150x150.png' %}" alt="" class="rounded-circle">
                 {% else %}
-                    <img src="{{ usuario.avatar.url }}" alt="" class="rounded-circle">
+                    <img src="{{ usuario.avatar.url }}" alt="" class="rounded-circle" style="object-fit: cover; height: 80px;">
                 {% endif %}
             </a>
         </div>
