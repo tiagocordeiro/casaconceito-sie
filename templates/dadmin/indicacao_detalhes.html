@@ -2,8 +2,8 @@
 {% load static %}
 {% load parceiros_extras %}
 
-{% block title %}Detalhes da Indicação - Casa Conceito{% endblock %}
-{% block page-title %}Detalhes da Indicação{% endblock %}
+{% block title %}Dashboard - S.I.E.{% endblock %}
+{% block page-title %}Nova Indicação{% endblock %}
 
 {% block breadcrumb %}
   <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
@@ -65,14 +65,19 @@
                 <h5 class="h5 fw--600 mb-3">Progresso</h5>
               </div>
               <div class="col">
+                <div class="progress h-15px mt-2">
                 {% if solicitacao.status_pagamento == 'PAGO' %}
-                  <div class="progress h-15px mt-2">
                     <div class="progress-bar progress-bar-striped bg-success w-100">100%</div>
                   </div>
                 {% else %}
-                  <div class="progress h-15px mt-2">
-                    <div class="progress-bar progress-bar-striped bg-info w-75">75%</div>
-                  </div>
+                  {% if indicacao.status == 'NOVO' %}
+                      <div class="progress-bar progress-bar-striped bg-info w-25">25%</div>
+                    {% elif indicacao.status == 'EM ANDAMENTO' %}
+                      <div class="progress-bar progress-bar-striped bg-info w-50">50%</div>
+                    {% elif indicacao.status == 'FECHADO' %}
+                        <div class="progress-bar progress-bar-striped bg-info w-75">75%</div>
+                  {% endif %}
+                </div>
                 {% endif %}
               </div>
             </div>

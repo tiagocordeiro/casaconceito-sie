@@ -14,25 +14,25 @@
 
                             {% if form.errors %}
                                 <div class="alert alert-danger" role="alert">
-                                  Your username and password didn't match. Please try again.
+                                  Seu usuário e senha não correspondem. Por favor, tente novamente.
                                 </div>
                             {% endif %}
 
                             {% if next %}
                                 {% if user.is_authenticated %}
                                     <div class="alert alert-primary" role="alert">
-                                        Your account doesn't have access to this page. To proceed, please login with an account that has access.
+                                        Sua conta não tem acesso a esta página. Para proseguir, acesse com outra conta.
                                     </div>
                                 {% else %}
                                     <div class="alert alert-secondary" role="alert">
-                                        Please login to see this page.
+                                        Por favor, faça login para visualizar esta página.
                                     </div>
                                 {% endif %}
                             {% endif %}
 
                             <h2 class="h2">Ainda não tem uma conta? Registre-se.</h2>
-                            <p>Após o cadastro, nossa equipe irá liberar seu acesso ao sistema.</p>
-                            <a href="{% url 'signup' %}" class="btn btn-rounded">Register Now</a>
+                            <p>Após o cadastro, você poderá adicionar suas indicações.</p>
+                            <a href="{% url 'signup' %}" class="btn btn-rounded">Cadastre-se</a>
                         </div>
                     </div>
                     <!-- Login Content End -->
@@ -74,14 +74,14 @@
                                 </div>
 
                                 <div class="m-account--actions">
-                                    <a href="{% url 'password_reset' %}" class="btn-link">Forgot Password?</a>
+                                    <a href="{% url 'password_reset' %}" class="btn-link">Esqueceu a senha?</a>
                                     <input type="hidden" name="next" value="{{ next }}" />
 
                                     <button type="submit" value="login" class="btn btn-rounded btn-primary" name="login">Login</button>
                                 </div>
 
                                 <div class="m-account--footer">
-                                    <p>&copy; 2018 S.I.E.</p>
+                                    <p>&copy; 2018 Mulher Gorila</p>
                                 </div>
                             </form>
                         </div>
