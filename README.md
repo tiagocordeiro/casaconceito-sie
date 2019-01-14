@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/tiagocordeiro/casaconceito-sie.svg?branch=master)](https://travis-ci.org/tiagocordeiro/casaconceito-sie)
 [![Updates](https://pyup.io/repos/github/tiagocordeiro/casaconceito-sie/shield.svg)](https://pyup.io/repos/github/tiagocordeiro/casaconceito-sie/)
 [![Python 3](https://pyup.io/repos/github/tiagocordeiro/casaconceito-sie/python-3-shield.svg)](https://pyup.io/repos/github/tiagocordeiro/casaconceito-sie/)
+[![codecov](https://codecov.io/gh/tiagocordeiro/casaconceito-sie/branch/master/graph/badge.svg)](https://codecov.io/gh/tiagocordeiro/casaconceito-sie)
 
 
 ## Como rodar o projeto?
