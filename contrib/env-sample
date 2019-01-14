@@ -2,6 +2,7 @@ SECRET_KEY=ChangeFor_aSecretHere
 DEBUG=True
 ALLOWED_HOSTS=localhost, 127.0.0.1
 SENTRY_DSN=
+CODECOV_TOKEN=
 DATABASE_URL=postgres://postgres@localhost/travis_ci_db
 
 

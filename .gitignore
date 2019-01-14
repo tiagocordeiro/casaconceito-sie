@@ -457,3 +457,7 @@ ASALocalRun/
 # VScode
 .vscode/
 /newrelic.ini
+
+# Local Files
+/staticfiles/
+/mediafiles/
