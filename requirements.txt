@@ -1,6 +1,6 @@
 certifi==2018.11.29
 chardet==3.0.4
-cloudinary==1.15.0
+cloudinary==1.18.1
 dj-database-url==0.5.0
 dj-static==0.0.6
 django-cloudinary-storage==0.2.3
