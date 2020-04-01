@@ -5,7 +5,7 @@ dj-database-url==0.5.0
 dj-static==0.0.6
 django-cloudinary-storage==0.2.3
 django-heroku==0.3.1
-Django==2.1.7
+Django==3.0.5
 feedparser==5.2.1
 google-api-python-client==1.7.7
 gunicorn==19.9.0
