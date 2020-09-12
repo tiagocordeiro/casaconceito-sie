@@ -6,7 +6,7 @@ dj-static==0.0.6
 django-cloudinary-storage==0.2.3
 django-heroku==0.3.1
 Django==2.1.7
-feedparser==5.2.1
+feedparser==6.0.0
 google-api-python-client==1.7.7
 gunicorn==19.9.0
 httplib2==0.12.0
